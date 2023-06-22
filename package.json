@@ -1,0 +1,35 @@
+{
+  "name": "dashboard-extensions",
+  "version": "0.1.0",
+  "private": false,
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "@rancher/components": "0.1.3",
+    "@rancher/shell": "^0.3.14",
+    "@types/lodash": "4.14.184",
+    "core-js": "3.21.1",
+    "css-loader": "6.7.3"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8"
+  },
+  "resolutions": {
+    "**/webpack": "4",
+    "@types/node": "^16"
+  },
+  "scripts": {
+    "dev": "NODE_ENV=dev ./node_modules/.bin/vue-cli-service serve",
+    "build": "./node_modules/.bin/vue-cli-service build",
+    "clean": "./node_modules/@rancher/shell/scripts/clean",
+    "build-pkg": "./node_modules/@rancher/shell/scripts/build-pkg.sh",
+    "serve-pkgs": "./node_modules/@rancher/shell/scripts/serve-pkgs",
+    "publish-pkgs": "./node_modules/@rancher/shell/scripts/extension/publish"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "printWidth": 100,
+    "singleQuote": true
+  }
+}

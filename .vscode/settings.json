@@ -1,0 +1,23 @@
+{
+  "files.exclude": {
+    ".ackrc": false,
+    ".dockerignore": false,
+    ".drone.yml": false,
+    ".editorconfig": false,
+    ".eslintcache": false,
+    ".eslintignore": false,
+    ".eslintrc.js": false,
+    ".gitignore": false,
+    ".nuxt*": false,
+    ".nyc_output": false,
+    "Dockerfile": false,
+    ".vscode": false,
+    "LICENSE": false,
+    "node_modules": false,
+    "babel.config.js": false,
+    "jsconfig.json": false,
+    "yarn-error.log": false,
+    "pkg/**/.shell": false,
+    "pkg/**/node_modules": false,
+  }
+}
