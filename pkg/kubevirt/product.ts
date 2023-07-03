@@ -1,4 +1,5 @@
 import { IPlugin } from '@shell/core/types';
+// import { STATE, NAME, NAMESPACE, AGE, STATUS } from '@shell/config/table-headers';
 import {
   KUBEVIRT_RESOURCE_NAME,
   PRODUCT_NAME,
@@ -6,8 +7,8 @@ import {
   VM_RESOURCE_NAME,
 } from './constants';
 
-export function init($plugin: IPlugin, store: any) {
-  const { basicType, product } = $plugin.DSL(store, PRODUCT_NAME);
+export function init(plugin: IPlugin, store: any) {
+  const { basicType, product, mapGroup } = plugin.DSL(store, PRODUCT_NAME);
 
   // top level product
   // product({
@@ -19,8 +20,6 @@ export function init($plugin: IPlugin, store: any) {
   // cluster level product
   product({
     inStore: 'cluster',
-    // icon: 'kubevirt',
-    // removeable: false,
     showNamespaceFilter: true,
     ifHaveType: KUBEVIRT_RESOURCE_NAME,
   });
@@ -48,22 +47,76 @@ export function init($plugin: IPlugin, store: any) {
   // const UI_PLUGIN = 'catalog.cattle.io.uiplugin';
 
   // mapGroup('workload', 'Workloads'); // the label should be translated
+  mapGroup('kubevirt', 'Virtual Machines');
 
-  // headers(UI_PLUGIN, [
+  // headers(VM_RESOURCE_NAME, [
   //   STATE,
-  //   NAME_COL,
   //   {
-  //     name: 'version',
-  //     label: 'Versionooooo',
-  //     value: 'version',
-  //     getValue: (row) => row.version,
+  //     ...NAME,
+  //     width: 300,
+  //   },
+  //   NAMESPACE,
+  //   {
+  //     name: 'CPU',
+  //     label: 'CPU',
+  //     sort: ['spec.template.spec.domain.cpu.cores'],
+  //     value: 'spec.template.spec.domain.cpu.cores',
+  //     align: 'center',
+  //     dashIfEmpty: true,
   //   },
   //   {
-  //     name: 'cacheState',
-  //     label: 'Cache State',
-  //     value: 'status.cacheState',
-  //     getValue: (row) => row.status?.cacheState,
+  //     name: 'Memory',
+  //     value: 'displayMemory',
+  //     sort: ['memorySort'],
+  //     align: 'center',
+  //     labelKey: 'tableHeaders.memory',
+  //     formatter: 'Si',
+  //     formatterOpts: {
+  //       opts: {
+  //         increment: 1024,
+  //         addSuffix: true,
+  //         maxExponent: 3,
+  //         minExponent: 3,
+  //         suffix: 'i',
+  //       },
+  //       needParseSi: true,
+  //     },
   //   },
-  //   AGE,
+  //   {
+  //     name: 'ip',
+  //     label: 'IP Address',
+  //     value: 'id',
+  //     formatter: 'HarvesterIpAddress',
+  //     labelKey: 'tableHeaders.ipAddress',
+  //   },
+  //   {
+  //     name: 'node',
+  //     label: 'Node',
+  //     value: 'id',
+  //     sort: ['realAttachNodeName'],
+  //     formatter: 'NodeName',
+  //     labelKey: 'tableHeaders.node',
+  //   },
+  //   {
+  //     ...AGE,
+  //     sort: 'metadata.creationTimestamp:desc',
+  //   },
+  // STATE,
+  // NAME,
+  // NAMESPACE,
+  // STATUS,
+  // // READY,
+  // {
+  //   name: 'run-strategy',
+  //   label: 'Run strategy',
+  //   value: 'runStrategyLabel',
+  //   sort: ['runStrategyLabel'],
+  //   getValue: (row: VirtualMachine) => {
+  //     console.log('row', row);
+  //     // return row.runStrategyLabel;
+  //     return row.isPaused;
+  //   },
+  // },
+  // AGE,
   // ]);
 }
