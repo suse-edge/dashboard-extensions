@@ -6,11 +6,17 @@
     "node": ">=16"
   },
   "dependencies": {
+    "@novnc/novnc": "^1.4.0",
     "@rancher/components": "0.1.3",
     "@rancher/shell": "^0.3.14",
     "@types/lodash": "4.14.184",
     "core-js": "3.21.1",
-    "css-loader": "6.7.3"
+    "css-loader": "6.7.3",
+    "xterm": "^5.2.1",
+    "xterm-addon-fit": "^0.7.0",
+    "xterm-addon-search": "^0.12.0",
+    "xterm-addon-web-links": "^0.8.0",
+    "xterm-addon-webgl": "^0.15.0"
   },
   "devDependencies": {
     "prettier": "^2.8.8"
