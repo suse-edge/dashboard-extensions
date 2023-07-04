@@ -1,9 +1,10 @@
 <script>
+import Vue from 'vue';
 import Loading from '@shell/components/Loading';
 import { VMI_RESOURCE_NAME } from '../constants';
 import NovncConsoleWrapper from './console/NovncConsoleWrapper.vue';
 
-export default {
+export default Vue.extend({
   layout: 'blank',
 
   components: { NovncConsoleWrapper, Loading },
@@ -34,7 +35,7 @@ export default {
   head() {
     return { title: this.vmi?.metadata?.name };
   },
-};
+});
 </script>
 
 <template>
