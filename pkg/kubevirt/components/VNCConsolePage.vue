@@ -1,12 +1,12 @@
 <script>
 import Loading from '@shell/components/Loading';
 import { VMI_RESOURCE_NAME } from '../constants';
-import SerialConsole from './console/SerialConsole';
+import NovncConsoleWrapper from './console/NovncConsoleWrapper.vue';
 
 export default {
   layout: 'blank',
 
-  components: { SerialConsole, Loading },
+  components: { NovncConsoleWrapper, Loading },
 
   async fetch() {
     await this.$store.dispatch('cluster/find', {
@@ -27,7 +27,7 @@ export default {
 
   mounted() {
     window.addEventListener('beforeunload', () => {
-      this.$refs.serialConsole.close();
+      this.$refs.console.close();
     });
   },
 
@@ -38,17 +38,20 @@ export default {
 </script>
 
 <template>
-  <div>
-    <Loading v-if="$fetchState.pending" />
-    <SerialConsole v-else ref="serialConsole" v-model="vmi" />
-  </div>
+  <Loading v-if="$fetchState.pending" />
+  <NovncConsoleWrapper v-else ref="console" v-model="vmi" class="novnc-wrapper" />
 </template>
 
-<style lang="scss" scoped>
-body,
+<style>
+HTML,
+BODY,
+MAIN,
 #__nuxt,
 #__layout,
-main {
+#app,
+.vm-console,
+.vm-console > DIV,
+.vm-console > DIV > DIV {
   height: 100%;
 }
 </style>

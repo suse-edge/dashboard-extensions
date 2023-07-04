@@ -3,6 +3,7 @@ import { ActionLocation, IPlugin } from '@shell/core/types';
 import { VM_RESOURCE_NAME, PRODUCT_NAME } from './constants';
 import { startVMAction, stopVMAction } from './actions';
 import SerialConsolePage from './components/SerialConsolePage';
+import VNCConsolePage from './components/VNCConsolePage';
 
 // Init the package
 export default function (plugin: IPlugin) {
@@ -32,7 +33,7 @@ export default function (plugin: IPlugin) {
   plugin.addRoute({
     name: `${PRODUCT_NAME}-c-cluster-vm-vncconsole`,
     path: `/:product/c/:cluster/console/:namespace/:vm/vnc`,
-    component: SerialConsolePage,
+    component: VNCConsolePage,
     meta: {
       product: PRODUCT_NAME,
     },
