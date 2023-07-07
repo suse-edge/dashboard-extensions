@@ -244,7 +244,7 @@ export default {
 </script>
 
 <template>
-  <div class="harvester-shell-container">
+  <div class="console-shell-container">
     <div ref="xterm" class="shell-body" />
     <resize-observer @notify="fit" />
   </div>
@@ -260,7 +260,7 @@ MAIN {
   height: 100%;
 }
 
-.harvester-shell-container {
+.console-shell-container {
   height: 100%;
   overflow: hidden;
 
