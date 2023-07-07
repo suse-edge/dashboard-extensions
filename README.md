@@ -14,5 +14,5 @@
 
 # SUSE Edge Rancher Dashboard extensions
 
-This repository contains a Rancher Dashboard skeleton application and hosts a set of extensions each living in it's respective directory under 'pkg/'.
+This repository contains a Rancher Dashboard skeleton application and hosts a set of extensions each living in it's respective directory under `pkg/`.
 
