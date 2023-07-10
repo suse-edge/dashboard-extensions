@@ -99,9 +99,9 @@ export default class VirtualMachine extends SteveModel {
   get stateDisplay() {
     // TODO use actualState
     // return this.actualState;
-    if (this.status.printableStatus === 'Stopped') {
+    if (this.status?.printableStatus === 'Stopped') {
       return OFF;
     }
-    return this.status.printableStatus;
+    return this.status?.printableStatus;
   }
 }
