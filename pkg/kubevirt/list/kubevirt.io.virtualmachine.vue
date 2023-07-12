@@ -1,7 +1,7 @@
 <script>
 import ResourceTable from '@shell/components/ResourceTable';
 import LinkDetail from '@shell/components/formatter/LinkDetail';
-// import HarvesterVmState from '../formatters/HarvesterVmState';
+import VMState from '../formatters/VMState';
 import { STATE, AGE, NAME, NAMESPACE } from '@shell/config/table-headers';
 import { allHash } from '@shell/utils/promise';
 import Loading from '@shell/components/Loading';
@@ -12,7 +12,7 @@ export default {
   name: 'VirtualMachineList',
   components: {
     Loading,
-    // HarvesterVmState,
+    VMState,
     LinkDetail,
     ConsoleBar,
     ResourceTable,
@@ -132,16 +132,11 @@ export default {
       key-field="_key"
       v-on="$listeners"
     >
-      <!-- <template slot="cell:state" slot-scope="scope" class="state-col">
+      <template slot="cell:state" slot-scope="scope" class="state-col">
         <div class="state">
-          <HarvesterVmState
-            class="vmstate"
-            :row="scope.row"
-            :all-node-network="allNodeNetworks"
-            :all-cluster-network="allClusterNetworks"
-          />
+          <VMState class="vmstate" :row="scope.row" />
         </div>
-      </template> -->
+      </template>
 
       <template slot="cell:name" slot-scope="scope">
         <div class="name-console">
