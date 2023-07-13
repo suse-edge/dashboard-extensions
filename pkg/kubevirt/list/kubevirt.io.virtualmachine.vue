@@ -5,8 +5,9 @@ import VMState from '../formatters/VMState';
 import { STATE, AGE, NAME, NAMESPACE } from '@shell/config/table-headers';
 import { allHash } from '@shell/utils/promise';
 import Loading from '@shell/components/Loading';
+import { POD, NODE } from '@shell/config/types';
 import ConsoleBar from '../components/VMConsoleBar';
-import { VMI_RESOURCE_NAME, VM_RESOURCE_NAME, NODE_TYPE } from '../constants';
+import { VMI_RESOURCE_NAME, VM_RESOURCE_NAME } from '../constants';
 
 export default {
   name: 'VirtualMachineList',
@@ -26,7 +27,7 @@ export default {
   },
 
   async fetch() {
-    const resourcesToFetch = [VM_RESOURCE_NAME, VMI_RESOURCE_NAME, NODE_TYPE];
+    const resourcesToFetch = [VM_RESOURCE_NAME, VMI_RESOURCE_NAME, NODE, POD];
     const promiseMap = resourcesToFetch.reduce((res, resourceType) => {
       if (this.$store.getters['cluster/schemaFor'](resourceType)) {
         res[resourceType] = this.$store.dispatch('cluster/findAll', {
@@ -93,7 +94,7 @@ export default {
           labelKey: 'tableHeaders.node',
           value: 'nodeName',
           formatter: 'LinkName',
-          formatterOpts: { type: NODE_TYPE },
+          formatterOpts: { type: NODE },
           dashIfEmpty: true,
         },
         {

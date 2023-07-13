@@ -1,7 +1,8 @@
 import SteveModel from '@shell/plugins/steve/steve-class';
 import { get } from '@shell/utils/object';
 import { findBy } from '@shell/utils/array';
-import { VMI_RESOURCE_NAME, NODE_TYPE } from '../constants';
+import { POD, NODE } from '@shell/config/types';
+import { VMI_RESOURCE_NAME } from '../constants';
 
 export const OFF = 'Off';
 
@@ -86,11 +87,9 @@ export default class VirtualMachine extends SteveModel {
 
   get nodeName() {
     const vmi = this.$getters['byId'](VMI_RESOURCE_NAME, this.id);
-    const node = this.$getters['byId'](NODE_TYPE, vmi?.status?.nodeName);
+    const node = this.$getters['byId'](NODE, vmi?.status?.nodeName);
     return node?.id;
   }
-
-  // -----------------------
 
   get displayMemory() {
     return (
@@ -102,6 +101,17 @@ export default class VirtualMachine extends SteveModel {
   get networksName() {
     const interfaces = this.spec.template.spec.domain.devices?.interfaces || [];
     return interfaces.map((i) => i.name);
+  }
+
+  get podResource() {
+    const podList = this.$getters['all'](POD);
+
+    return podList.find((pod) => {
+      return (
+        this.vmi?.metadata?.name &&
+        this.vmi?.metadata?.name === pod.metadata?.ownerReferences?.[0].name
+      );
+    });
   }
 
   get isVMExpectedRunning() {
