@@ -2,8 +2,8 @@ import { importTypes } from '@rancher/auto-import';
 import { ActionLocation, IPlugin } from '@shell/core/types';
 import { VM_RESOURCE_NAME, PRODUCT_NAME } from './constants';
 import { startVMAction, stopVMAction } from './actions';
-import SerialConsolePage from './components/SerialConsolePage';
-import VNCConsolePage from './components/VNCConsolePage';
+import SerialConsolePage from './components/SerialConsolePage.vue';
+import VNCConsolePage from './components/VNCConsolePage.vue';
 
 // Init the package
 export default function (plugin: IPlugin) {
