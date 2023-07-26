@@ -1,5 +1,11 @@
 import { Action } from '@rancher/shell/core/types';
-import VirtualMachine from './models/kubevirt.io.virtualmachine';
+import VirtualMachineModel from './models/kubevirt.io.virtualmachine';
+
+// NOTE: a workaround for properties not defined on VirtualMachine's parent classes
+type VirtualMachine = VirtualMachineModel & {
+  spec: any;
+  save: any;
+};
 
 const startVMs: Action['invoke'] = function (opts, resources: VirtualMachine[]) {
   resources.map((resource) => {
