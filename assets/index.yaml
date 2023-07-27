@@ -12,12 +12,12 @@ entries:
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-07-26T14:31:36.162717989Z"
+    created: "2023-07-27T07:13:47.992946341Z"
     description: KubeVirt Rancher Dashboard extension
-    digest: 443cb743b1fdd4ddb93270b081773ba789977aed52f58c40085b6a7665089a01
+    digest: ee371a196da7f28bab3b3d10f1f5f2238f829d5670e8ace92a23ef76590ac47a
     name: suse-edge-kubevirt-extension
     type: application
     urls:
     - assets/kubevirt/suse-edge-kubevirt-extension-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-26T14:31:36.161688273Z"
+generated: "2023-07-27T07:13:47.992197538Z"
