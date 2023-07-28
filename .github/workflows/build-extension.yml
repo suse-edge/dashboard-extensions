@@ -95,9 +95,15 @@ jobs:
         with:
           name: charts
 
+      - name: Update index.html
+        run: |
+          command -v helm > /dev/null 2>&1 || die "helm command not found" 2
+          helm plugin list | grep -q repo-html || helm plugin install https://github.com/halkeye/helm-repo-html
+          helm repo-html -t index.tpl
+
       - name: Commit build
         run: |
-          git add ./{assets,charts,extensions,index.yaml}
+          git add ./{assets,charts,extensions,index.yaml,index.tpl,index.html}
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
           git push
 
