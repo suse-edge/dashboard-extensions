@@ -11,6 +11,25 @@ entries:
       catalog.cattle.io/scope: management
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
+    appVersion: 0.1.1
+    created: "2023-07-28T11:00:09.784236415Z"
+    description: KubeVirt Rancher Dashboard extension
+    digest: 7b5bad32ad0411e4eacbfc5ee2aa65e24aa42c0926b3248e42de1c0163988326
+    name: suse-edge-kubevirt-extension
+    type: application
+    urls:
+    - https://github.com/suse-edge/dashboard-extensions/releases/download/suse-edge-kubevirt-extension-0.1.1/suse-edge-kubevirt-extension-0.1.1.tgz
+    version: 0.1.1
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.28.0-0'
+      catalog.cattle.io/namespace: cattle-ui-plugin-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux, windows
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.8.0-0'
+      catalog.cattle.io/scope: management
+      catalog.cattle.io/ui-component: plugins
+    apiVersion: v2
     appVersion: 0.1.0
     created: "2023-07-26T14:31:36.162717989Z"
     description: KubeVirt Rancher Dashboard extension
@@ -20,4 +39,24 @@ entries:
     urls:
     - assets/kubevirt/suse-edge-kubevirt-extension-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-26T14:31:36.161688273Z"
+  test:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.28.0-0'
+      catalog.cattle.io/namespace: cattle-ui-plugin-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux, windows
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.8.0-0'
+      catalog.cattle.io/scope: management
+      catalog.cattle.io/ui-component: plugins
+    apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-07-28T11:00:09.900285425Z"
+    description: test plugin
+    digest: 23ef9674875f9c912599b65d8c23810dfe132640a2af7f8e9d31ea80a5990012
+    name: test
+    type: application
+    urls:
+    - https://github.com/suse-edge/dashboard-extensions/releases/download/test-0.1.0/test-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-07-28T11:00:09.900299225Z"
