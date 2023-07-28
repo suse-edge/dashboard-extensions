@@ -11,13 +11,52 @@ entries:
       catalog.cattle.io/scope: management
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
-    appVersion: 0.1.0
-    created: "2023-07-27T07:13:47.992946341Z"
+    appVersion: 0.1.1
+    created: "2023-07-28T10:59:47.630919732Z"
     description: KubeVirt Rancher Dashboard extension
-    digest: ee371a196da7f28bab3b3d10f1f5f2238f829d5670e8ace92a23ef76590ac47a
+    digest: e2665fa5e9d98147d9c9091caa6ddd59ace1b81b56a32df062b2c906f4c6aaa4
+    name: suse-edge-kubevirt-extension
+    type: application
+    urls:
+    - assets/kubevirt/suse-edge-kubevirt-extension-0.1.1.tgz
+    version: 0.1.1
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.28.0-0'
+      catalog.cattle.io/namespace: cattle-ui-plugin-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux, windows
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.8.0-0'
+      catalog.cattle.io/scope: management
+      catalog.cattle.io/ui-component: plugins
+    apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-07-26T14:31:36.162717989Z"
+    description: KubeVirt Rancher Dashboard extension
+    digest: 443cb743b1fdd4ddb93270b081773ba789977aed52f58c40085b6a7665089a01
     name: suse-edge-kubevirt-extension
     type: application
     urls:
     - assets/kubevirt/suse-edge-kubevirt-extension-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-27T07:13:47.992197538Z"
+  test:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.28.0-0'
+      catalog.cattle.io/namespace: cattle-ui-plugin-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux, windows
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.8.0-0'
+      catalog.cattle.io/scope: management
+      catalog.cattle.io/ui-component: plugins
+    apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-07-28T10:59:47.631239636Z"
+    description: test plugin
+    digest: 6677181c674915a22ed100a2f335b099dd0d5e84193556a9accb9515fd6a4e75
+    name: test
+    type: application
+    urls:
+    - assets/test/test-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-07-28T10:59:47.630045824Z"

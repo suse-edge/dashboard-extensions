@@ -1,0 +1,3 @@
+plugin/package.json
+plugin/test-0.1.0.umd.min.js
+plugin/test-0.1.0.umd.min.js.map
