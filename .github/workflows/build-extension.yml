@@ -90,6 +90,11 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.8.0
+
       - name: Download build artifact
         uses: actions/download-artifact@v3
         with:
@@ -97,7 +102,6 @@ jobs:
 
       - name: Update index.html
         run: |
-          command -v helm > /dev/null 2>&1 || die "helm command not found" 2
           helm plugin list | grep -q repo-html || helm plugin install https://github.com/halkeye/helm-repo-html
           helm repo-html -t index.tpl
 
