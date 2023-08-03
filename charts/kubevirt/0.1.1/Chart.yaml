@@ -9,7 +9,8 @@ annotations:
   catalog.cattle.io/ui-component: plugins
 apiVersion: v2
 appVersion: "0.1.1"
-description: KubeVirt Rancher Dashboard extension
-name: suse-edge-kubevirt-extension
+description: 'SUSE Edge: KubeVirt extension for Rancher Dashboard'
+name: kubevirt
 type: application
 version: 0.1.1
+icon: https://github.com/cncf/artwork/blob/master/projects/kubevirt/icon/color/kubevirt-icon-color.svg

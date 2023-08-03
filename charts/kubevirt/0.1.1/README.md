@@ -1,3 +1,6 @@
-## This is a subtitle
+# SUSE Edge: KubeVirt extension for Rancher Dashboard",
 
-This is a placeholder for the KubeVirt extension description.
+An Edge focused extension for Rancher Dashboard allowing you to monitor and interact virtual machine based workloads.
+
+For more information on SUSE Edge see https://suse-edge.github.io/
+For more information on Kubevirt see https://kubevirt.io/
