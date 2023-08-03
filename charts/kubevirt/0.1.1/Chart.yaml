@@ -13,4 +13,4 @@ description: 'SUSE Edge: KubeVirt extension for Rancher Dashboard'
 name: kubevirt
 type: application
 version: 0.1.1
-icon: https://github.com/cncf/artwork/blob/master/projects/kubevirt/icon/color/kubevirt-icon-color.svg
+icon: https://raw.githubusercontent.com/cncf/artwork/master/projects/kubevirt/icon/color/kubevirt-icon-color.svg
