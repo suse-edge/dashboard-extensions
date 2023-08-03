@@ -15,7 +15,7 @@ entries:
     created: "2023-08-03T15:53:18.128585698Z"
     description: 'SUSE Edge: KubeVirt extension for Rancher Dashboard'
     digest: 7f404fdc13631cc39f25214215cca4a6a05dc61d6b39e2c2de814298ee3da5a8
-    icon: https://github.com/cncf/artwork/blob/master/projects/kubevirt/icon/color/kubevirt-icon-color.svg
+    icon: https://raw.githubusercontent.com/cncf/artwork/master/projects/kubevirt/icon/color/kubevirt-icon-color.svg
     name: kubevirt
     type: application
     urls:
