@@ -11,12 +11,12 @@ export default function (plugin: IPlugin) {
   importTypes(plugin);
 
   // Provide plugin metadata from package.json
-  const { version, description } = require('./package.json');
+  const { version, description, icon } = require('./package.json');
   plugin.metadata = {
     name: 'KubeVirt',
     version,
     description,
-    icon: require('./assets/images/kubevirt-icon-color.svg'),
+    icon,
   };
 
   plugin.addProduct(require('./product'));
