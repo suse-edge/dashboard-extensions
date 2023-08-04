@@ -5,7 +5,9 @@
   "version": "0.1.1",
   "license": "Apache-2.0",
   "private": false,
-  "rancher": true,
+  "rancher": {
+    "catalog.cattle.io/display-name": "KubeVirt"
+  },
   "scripts": {
     "dev": "./node_modules/.bin/nuxt dev",
     "nuxt": "./node_modules/.bin/nuxt"
