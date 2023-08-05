@@ -100,14 +100,9 @@ jobs:
         with:
           name: charts
 
-      - name: Update index.html
-        run: |
-          helm plugin list | grep -q repo-html || helm plugin install https://github.com/halkeye/helm-repo-html
-          helm repo-html -t index.tpl
-
       - name: Commit build
         run: |
-          git add ./{assets,charts,extensions,index.yaml,index.tpl,index.html}
+          git add ./{assets,charts,extensions,index.yaml}
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
           git push
 
@@ -118,3 +113,11 @@ jobs:
         env:
           CR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           CR_SKIP_EXISTING: true
+
+      - name: Update index.html
+        run: |
+          helm plugin list | grep -q repo-html || helm plugin install https://github.com/halkeye/helm-repo-html
+          helm repo-html -t index.tpl
+          git add ./index.html
+          git commit -a -m "Update index.html"
+          git push
