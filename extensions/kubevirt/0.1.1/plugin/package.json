@@ -1,5 +1,5 @@
 {
-  "name": "kubevirt",
+  "name": "kubevirt-dashboard-extension",
   "description": "SUSE Edge: KubeVirt extension for Rancher Dashboard",
   "icon": "https://raw.githubusercontent.com/cncf/artwork/master/projects/kubevirt/icon/color/kubevirt-icon-color.svg",
   "version": "0.1.1",
@@ -17,5 +17,5 @@
   "files": [
     "**/*"
   ],
-  "main": "kubevirt-0.1.1.umd.min.js"
+  "main": "kubevirt-dashboard-extension-0.1.1.umd.min.js"
 }
