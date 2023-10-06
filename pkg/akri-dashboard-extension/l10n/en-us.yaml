@@ -1,0 +1,11 @@
+akri:
+  tableHeaders:
+    configurationName: Configuration
+    shared: Shared
+    nodes: Nodes
+  resourceTable:
+    groupBy:
+      configurationName: Group by Configuration
+    groupLabel:
+      configuration: '<span>Configuration:</span> {name}'
+  someTest: 'This is a test'
