@@ -1,6 +1,8 @@
 akri:
   tableHeaders:
     configurationName: Configuration
+    brokerPodsCount: Broker pods
+    brokerJobsCount: Broker jobs
     shared: Shared
     nodes: Nodes
   resourceTable:

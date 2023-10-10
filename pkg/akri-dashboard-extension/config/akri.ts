@@ -1,7 +1,13 @@
 import { ConfigureTypeOptions, HeaderOptions, IPlugin } from '@shell/core/types';
 import { PRODUCT_NAME, ResourceNames } from './constants';
 import { AGE, NAME, NAMESPACE, STATE } from '@shell/config/table-headers';
-import { CONFIGURATION_NAME, NODES, SHARED } from './table-columns';
+import {
+  BROKER_JOBS_COUNT,
+  BROKER_PODS_COUNT,
+  CONFIGURATION_NAME,
+  NODES,
+  SHARED,
+} from './table-columns';
 
 // This allows expanding ConfigureTypeFunction because isEditable and listGroups is not included
 type ConfigureTypeFunction = (
@@ -31,7 +37,7 @@ export function init(plugin: IPlugin, store: any) {
       {
         icon: 'icon-gear',
         value: 'configurationName',
-        field: 'groupByConfigurationName',
+        field: 'groupByConfigurationNameLabel',
         hideColumn: 'configurationName',
         tooltipKey: 'resourceTable.groupBy.configurationName',
       },
@@ -43,6 +49,8 @@ export function init(plugin: IPlugin, store: any) {
     NAME,
     NAMESPACE,
     CONFIGURATION_NAME,
+    BROKER_PODS_COUNT,
+    BROKER_JOBS_COUNT,
     SHARED,
     NODES,
     AGE,
