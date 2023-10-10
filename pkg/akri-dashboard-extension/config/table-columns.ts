@@ -1,6 +1,7 @@
 // import { ResourceNames } from './constants';
 import Instance from '../models/akri.sh.instance';
 import { HeaderOptions } from '@rancher/shell/core/types';
+import { POD, WORKLOAD_TYPES } from '@shell/config/types';
 
 export const CONFIGURATION_NAME: HeaderOptions = {
   name: 'configurationName',
@@ -12,6 +13,28 @@ export const CONFIGURATION_NAME: HeaderOptions = {
   formatter: 'LinkDetail',
   formatterOpts: {
     reference: 'configurationDetailLocation',
+  },
+};
+
+export const BROKER_PODS_COUNT = {
+  name: 'brokerPodsCount',
+  labelKey: 'tableHeaders.brokerPodsCount',
+  value: 'brokerPodsCount',
+  sort: 'brokerPodsCount',
+  formatter: 'AkriWorkloadDetailTabLink',
+  formatterOpts: {
+    fetchedResourceType: POD,
+  },
+};
+
+export const BROKER_JOBS_COUNT = {
+  name: 'brokerJobsCount',
+  labelKey: 'tableHeaders.brokerJobsCount',
+  value: 'brokerJobsCount',
+  sort: 'brokerJobsCount',
+  formatter: 'AkriWorkloadDetailTabLink',
+  formatterOpts: {
+    fetchedResourceType: WORKLOAD_TYPES.JOB,
   },
 };
 
