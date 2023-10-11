@@ -5,7 +5,7 @@ import { POD, WORKLOAD_TYPES } from '@shell/config/types';
 
 export const CONFIGURATION_NAME: HeaderOptions = {
   name: 'configurationName',
-  labelKey: 'tableHeaders.configurationName',
+  labelKey: 'akri.tableHeaders.configurationName',
   getValue: (row: Instance) => row.spec?.configurationName || '---',
   value: 'spec.configurationName',
   sort: 'spec.configurationName',
@@ -18,7 +18,7 @@ export const CONFIGURATION_NAME: HeaderOptions = {
 
 export const BROKER_PODS_COUNT = {
   name: 'brokerPodsCount',
-  labelKey: 'tableHeaders.brokerPodsCount',
+  labelKey: 'akri.tableHeaders.brokerPodsCount',
   value: 'brokerPodsCount',
   sort: 'brokerPodsCount',
   formatter: 'AkriWorkloadDetailTabLink',
@@ -29,7 +29,7 @@ export const BROKER_PODS_COUNT = {
 
 export const BROKER_JOBS_COUNT = {
   name: 'brokerJobsCount',
-  labelKey: 'tableHeaders.brokerJobsCount',
+  labelKey: 'akri.tableHeaders.brokerJobsCount',
   value: 'brokerJobsCount',
   sort: 'brokerJobsCount',
   formatter: 'AkriWorkloadDetailTabLink',
@@ -40,7 +40,7 @@ export const BROKER_JOBS_COUNT = {
 
 export const SHARED = {
   name: 'shared',
-  labelKey: 'tableHeaders.shared',
+  labelKey: 'akri.tableHeaders.shared',
   // getValue: (row) => row.spec?.shared,
   value: 'spec.shared',
   formatter: 'Checked',
@@ -49,7 +49,7 @@ export const SHARED = {
 
 export const NODES = {
   name: 'nodes',
-  labelKey: 'tableHeaders.nodes',
+  labelKey: 'akri.tableHeaders.nodes',
   value: 'nodeNames',
   sort: 'nodeNames',
   search: 'nodeNames',
