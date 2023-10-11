@@ -42,7 +42,7 @@ export default class Instance extends SteveModel {
   }
 
   get groupByConfigurationNameLabel() {
-    return this.$rootGetters['i18n/t']('resourceTable.groupLabel.configuration', {
+    return this.$rootGetters['i18n/t']('akri.resourceTable.groupLabel.configuration', {
       name: escapeHtml(this.spec.configurationName),
     });
   }

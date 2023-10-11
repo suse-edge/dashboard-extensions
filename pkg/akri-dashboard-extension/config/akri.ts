@@ -39,7 +39,7 @@ export function init(plugin: IPlugin, store: any) {
         value: 'configurationName',
         field: 'groupByConfigurationNameLabel',
         hideColumn: 'configurationName',
-        tooltipKey: 'resourceTable.groupBy.configurationName',
+        tooltipKey: 'akri.resourceTable.groupBy.configurationName',
       },
     ],
   });
