@@ -26,6 +26,13 @@ export default {
     },
   },
 
+  data() {
+    return {
+      allVMs: [],
+      allVMIs: [],
+    };
+  },
+
   async fetch() {
     const resourcesToFetch = [VM_RESOURCE_NAME, VMI_RESOURCE_NAME, NODE, POD];
     const promiseMap = resourcesToFetch.reduce((res, resourceType) => {
@@ -40,13 +47,6 @@ export default {
 
     this.allVMs = resources[VM_RESOURCE_NAME] || [];
     this.allVMIs = resources[VMI_RESOURCE_NAME] || [];
-  },
-
-  data() {
-    return {
-      allVMs: [],
-      allVMIs: [],
-    };
   },
 
   computed: {
@@ -133,7 +133,7 @@ export default {
       key-field="_key"
       v-on="$listeners"
     >
-      <template slot="cell:state" slot-scope="scope" class="state-col">
+      <template slot="cell:state" slot-scope="scope">
         <div class="state">
           <VMState class="vmstate" :row="scope.row" />
         </div>

@@ -5,9 +5,12 @@ import { VMI_RESOURCE_NAME } from '../constants';
 import NovncConsoleWrapper from './console/NovncConsoleWrapper.vue';
 
 export default Vue.extend({
+  components: { NovncConsoleWrapper, Loading },
   layout: 'blank',
 
-  components: { NovncConsoleWrapper, Loading },
+  data() {
+    return { id: `${this.$route.params.namespace}/${this.$route.params.vm}` };
+  },
 
   async fetch() {
     await this.$store.dispatch('cluster/find', {
@@ -16,8 +19,8 @@ export default Vue.extend({
     });
   },
 
-  data() {
-    return { id: `${this.$route.params.namespace}/${this.$route.params.vm}` };
+  head() {
+    return { title: this.vmi?.metadata?.name };
   },
 
   computed: {
@@ -30,10 +33,6 @@ export default Vue.extend({
     window.addEventListener('beforeunload', () => {
       this.$refs.console.close();
     });
-  },
-
-  head() {
-    return { title: this.vmi?.metadata?.name };
   },
 });
 </script>

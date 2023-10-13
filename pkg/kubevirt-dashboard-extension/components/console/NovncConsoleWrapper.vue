@@ -98,11 +98,14 @@ const F_KEYS = {
 export default {
   components: { NovncConsole },
 
-  async fetch() {
-    this.vmResource = await this.$store.dispatch('cluster/find', {
-      type: VM_RESOURCE_NAME,
-      id: this.id,
-    });
+  props: {
+    value: {
+      type: Object,
+      required: true,
+      default: () => {
+        return {};
+      },
+    },
   },
 
   data() {
@@ -112,14 +115,11 @@ export default {
     };
   },
 
-  props: {
-    value: {
-      type: Object,
-      required: true,
-      default: () => {
-        return {};
-      },
-    },
+  async fetch() {
+    this.vmResource = await this.$store.dispatch('cluster/find', {
+      type: VM_RESOURCE_NAME,
+      id: this.id,
+    });
   },
 
   computed: {

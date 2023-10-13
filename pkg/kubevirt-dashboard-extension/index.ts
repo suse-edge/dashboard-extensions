@@ -13,6 +13,7 @@ export default function (plugin: IPlugin) {
   // Provide plugin metadata from package.json
   plugin.metadata = require('./package.json');
 
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   plugin.addProduct(require('./product'));
   plugin.addAction(ActionLocation.TABLE, { resource: [VM_RESOURCE_NAME] }, startVMAction);
   plugin.addAction(ActionLocation.TABLE, { resource: [VM_RESOURCE_NAME] }, stopVMAction);

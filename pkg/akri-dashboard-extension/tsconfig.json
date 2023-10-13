@@ -45,7 +45,7 @@
     "**/*.ts",
     "**/*.d.ts",
     "**/*.tsx",
-    "**/*.vue"
+    "**/*.vue",
   ],
   "exclude": [
     "../../node_modules"

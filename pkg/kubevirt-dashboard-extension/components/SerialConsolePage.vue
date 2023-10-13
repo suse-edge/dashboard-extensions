@@ -4,9 +4,12 @@ import { VMI_RESOURCE_NAME } from '../constants';
 import SerialConsole from './console/SerialConsole';
 
 export default {
+  components: { SerialConsole, Loading },
   layout: 'blank',
 
-  components: { SerialConsole, Loading },
+  data() {
+    return { id: `${this.$route.params.namespace}/${this.$route.params.vm}` };
+  },
 
   async fetch() {
     await this.$store.dispatch('cluster/find', {
@@ -15,8 +18,8 @@ export default {
     });
   },
 
-  data() {
-    return { id: `${this.$route.params.namespace}/${this.$route.params.vm}` };
+  head() {
+    return { title: this.vmi?.metadata?.name };
   },
 
   computed: {
@@ -29,10 +32,6 @@ export default {
     window.addEventListener('beforeunload', () => {
       this.$refs.serialConsole.close();
     });
-  },
-
-  head() {
-    return { title: this.vmi?.metadata?.name };
   },
 };
 </script>

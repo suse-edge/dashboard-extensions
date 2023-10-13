@@ -11,18 +11,23 @@ module.exports = {
     parser: '@typescript-eslint/parser',
   },
   extends: [
-    'standard',
     'eslint:recommended',
     'plugin:vue/recommended',
-    '@vue/typescript/recommended',
-    '@nuxtjs/eslint-config-typescript',
+    'plugin:@typescript-eslint/recommended',
+    // '@vue/eslint-config-typescript/recommended', or '@nuxtjs/eslint-config-typescript',
+    // Note: When ^ is enabled the linting e.g. no-undef on .vue files does not work
     'plugin:cypress/recommended',
+    '@vue/eslint-config-prettier',
     'prettier',
   ],
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier'], // https://github.com/prettier/eslint-plugin-prettier#recommended-configuration
   // add your custom rules here
   rules: {
     'prettier/prettier': 'error',
+    'arrow-body-style': 'off',
+    'prefer-arrow-callback': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
   },
   // rules: {
   //   'dot-notation': 'off',

@@ -22,7 +22,9 @@ export default {
     },
     col: {
       type: Object,
-      default: () => {},
+      default() {
+        return {};
+      },
     },
   },
 

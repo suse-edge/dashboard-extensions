@@ -9,30 +9,30 @@ export const OFF = 'Off';
 const VMI_WAITING_MESSAGE = 'The virtual machine is waiting for resources to become available.';
 const VM_ERROR = 'VM error';
 const STOPPING = 'Stopping';
-const WAITING = 'Waiting';
+// const WAITING = 'Waiting';
 const NOT_READY = 'Not Ready';
-const AGENT_CONNECTED = 'AgentConnected';
+// const AGENT_CONNECTED = 'AgentConnected';
 
 const PAUSED = 'Paused';
 const PAUSED_VM_MODAL_MESSAGE =
   'This VM has been paused. If you wish to unpause it, please click the Unpause button below. For further details, please check with your system administrator.';
 
-const POD_STATUS_NOT_SCHEDULABLE = 'POD_NOT_SCHEDULABLE';
-const POD_STATUS_CONTAINER_FAILING = 'POD_CONTAINER_FAILING';
+// const POD_STATUS_NOT_SCHEDULABLE = 'POD_NOT_SCHEDULABLE';
+// const POD_STATUS_CONTAINER_FAILING = 'POD_CONTAINER_FAILING';
 // eslint-disable-next-line no-unused-vars
-const POD_STATUS_NOT_READY = 'POD_NOT_READY';
+// const POD_STATUS_NOT_READY = 'POD_NOT_READY';
 
-const POD_STATUS_FAILED = 'POD_FAILED';
-const POD_STATUS_CRASHLOOP_BACKOFF = 'POD_CRASHLOOP_BACKOFF';
-const POD_STATUS_UNKNOWN = 'POD_STATUS_UNKNOWN';
+// const POD_STATUS_FAILED = 'POD_FAILED';
+// const POD_STATUS_CRASHLOOP_BACKOFF = 'POD_CRASHLOOP_BACKOFF';
+// const POD_STATUS_UNKNOWN = 'POD_STATUS_UNKNOWN';
 
-const POD_STATUS_ALL_ERROR = [
-  POD_STATUS_NOT_SCHEDULABLE,
-  POD_STATUS_CONTAINER_FAILING,
-  POD_STATUS_FAILED,
-  POD_STATUS_CRASHLOOP_BACKOFF,
-  POD_STATUS_UNKNOWN,
-];
+// const POD_STATUS_ALL_ERROR = [
+//   POD_STATUS_NOT_SCHEDULABLE,
+//   POD_STATUS_CONTAINER_FAILING,
+//   POD_STATUS_FAILED,
+//   POD_STATUS_CRASHLOOP_BACKOFF,
+//   POD_STATUS_UNKNOWN,
+// ];
 
 const POD_STATUS_COMPLETED = 'POD_STATUS_COMPLETED';
 const POD_STATUS_SUCCEEDED = 'POD_STATUS_SUCCEEDED';
