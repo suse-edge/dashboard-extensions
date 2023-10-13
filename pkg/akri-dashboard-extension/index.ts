@@ -10,5 +10,6 @@ export default function (plugin: IPlugin): void {
   plugin.metadata = require('./package.json');
 
   // Load a product
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   plugin.addProduct(require('./config/akri'));
 }

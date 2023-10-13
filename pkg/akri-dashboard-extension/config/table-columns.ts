@@ -16,7 +16,7 @@ export const CONFIGURATION_NAME: HeaderOptions = {
   },
 };
 
-export const BROKER_PODS_COUNT = {
+export const BROKER_PODS_COUNT: HeaderOptions = {
   name: 'brokerPodsCount',
   labelKey: 'akri.tableHeaders.brokerPodsCount',
   value: 'brokerPodsCount',
@@ -27,7 +27,7 @@ export const BROKER_PODS_COUNT = {
   },
 };
 
-export const BROKER_JOBS_COUNT = {
+export const BROKER_JOBS_COUNT: HeaderOptions = {
   name: 'brokerJobsCount',
   labelKey: 'akri.tableHeaders.brokerJobsCount',
   value: 'brokerJobsCount',
@@ -38,7 +38,7 @@ export const BROKER_JOBS_COUNT = {
   },
 };
 
-export const SHARED = {
+export const SHARED: HeaderOptions = {
   name: 'shared',
   labelKey: 'akri.tableHeaders.shared',
   // getValue: (row) => row.spec?.shared,
@@ -47,7 +47,7 @@ export const SHARED = {
   sort: 'spec.shared',
 };
 
-export const NODES = {
+export const NODES: HeaderOptions = {
   name: 'nodes',
   labelKey: 'akri.tableHeaders.nodes',
   value: 'nodeNames',

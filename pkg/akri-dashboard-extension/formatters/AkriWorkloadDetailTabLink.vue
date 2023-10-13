@@ -18,7 +18,9 @@ export default {
     },
     col: {
       type: Object,
-      default: () => {},
+      default() {
+        return {};
+      },
     },
     fetchedResourceType: {
       type: String,

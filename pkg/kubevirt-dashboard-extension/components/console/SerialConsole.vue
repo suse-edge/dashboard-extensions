@@ -160,7 +160,7 @@ export default {
 
       this.socket = new Socket(url);
 
-      this.socket.addEventListener(EVENT_CONNECTING, (e) => {
+      this.socket.addEventListener(EVENT_CONNECTING, () => {
         this.isOpen = false;
         this.isOpening = true;
       });
@@ -171,7 +171,7 @@ export default {
         console.error('Connect Error', e); // eslint-disable-line no-console
       });
 
-      this.socket.addEventListener(EVENT_CONNECTED, (e) => {
+      this.socket.addEventListener(EVENT_CONNECTED, () => {
         this.isOpen = true;
         this.isOpening = false;
         if (this.show) {
@@ -185,7 +185,7 @@ export default {
         }
       });
 
-      this.socket.addEventListener(EVENT_DISCONNECTED, (e) => {
+      this.socket.addEventListener(EVENT_DISCONNECTED, () => {
         this.isOpen = false;
         this.isOpening = false;
         this.$emit('close');
@@ -209,7 +209,7 @@ export default {
       }
     },
 
-    fit(arg) {
+    fit() {
       if (!this.fitAddon) {
         return;
       }

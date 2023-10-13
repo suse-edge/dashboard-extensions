@@ -22,14 +22,14 @@ import RFB from '@novnc/novnc/core/rfb';
 import BrandImage from '@shell/components/BrandImage';
 
 export default {
+  components: { BrandImage },
+
   props: {
     url: {
       type: String,
       default: '',
     },
   },
-
-  components: { BrandImage },
 
   data() {
     return {
@@ -46,7 +46,7 @@ export default {
       rfb.addEventListener('connect', () => {
         this.connected = true;
       });
-      rfb.addEventListener('disconnect', (e) => {
+      rfb.addEventListener('disconnect', () => {
         this.disconnected = true;
       });
 

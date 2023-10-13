@@ -1,3 +1,9 @@
+typeLabel:
+  akri.sh.instance: |-
+    {count, plural,
+      one { Akri instance }
+      other { Instances }
+    }
 akri:
   tableHeaders:
     configurationName: Configuration
@@ -10,4 +16,3 @@ akri:
       configurationName: Group by Configuration
     groupLabel:
       configuration: '<span>Configuration:</span> {name}'
-  someTest: 'This is a test'

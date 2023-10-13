@@ -1,7 +1,7 @@
 assets/fonts
 coverage
 .nyc_output
-node_modules/
+node_modules
 .npm
 .eslintcache
 .env
