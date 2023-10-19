@@ -20,7 +20,7 @@ akri:
     configuration:
       tabs:
         discoveryHandler:
-          title: Discovery Handler
+          title: Discovery handler
         brokers:
           title: Brokers
         services:
@@ -30,6 +30,8 @@ akri:
       fields:
         discoveryHandlerType:
           label: Discovery handler type
+        discoveryHandlerName:
+          label: Discovery handler name
         udevRules:
           label: Udev rules
           addLabel: Add rule
@@ -37,3 +39,6 @@ akri:
         groupRecursive:
           label: Group recursive
           tooltip: Defines whether to group discovered parent/children under the same instance.
+        discoveryDetailsYaml:
+          label: Discovery handler details
+          tooltip: A YAML string of discovery details that is passed to a Discovery Handler.
