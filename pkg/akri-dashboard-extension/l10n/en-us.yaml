@@ -16,3 +16,24 @@ akri:
       configurationName: Group by Configuration
     groupLabel:
       configuration: '<span>Configuration:</span> {name}'
+  edit:
+    configuration:
+      tabs:
+        discoveryHandler:
+          title: Discovery Handler
+        brokers:
+          title: Brokers
+        services:
+          title: Services
+        other:
+          title: Other
+      fields:
+        discoveryHandlerType:
+          label: Discovery handler type
+        udevRules:
+          label: Udev rules
+          addLabel: Add rule
+          description: A list of udev rules used to find instances created as a result of applying this udev configuration.
+        groupRecursive:
+          label: Group recursive
+          tooltip: Defines whether to group discovered parent/children under the same instance.
