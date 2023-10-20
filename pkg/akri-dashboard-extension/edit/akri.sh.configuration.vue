@@ -8,11 +8,12 @@ import NameNsDescription from '@shell/components/form/NameNsDescription';
 import ArrayList from '@shell/components/form/ArrayList';
 import Tab from '@shell/components/Tabbed/Tab';
 import Tabbed from '@shell/components/Tabbed';
-import { WORKLOAD_TYPES } from '@shell/config/types';
+import { WORKLOAD_TYPES, SECRET, CONFIG_MAP } from '@shell/config/types';
 import { set } from '@shell/utils/object';
 import UdevFields from '../components/UdevFields';
 import { LabeledInput } from '@rancher/components';
 import YamlEditor from '@shell/components/YamlEditor';
+import ResourceManager from '@shell/mixins/resource-manager';
 
 export default {
   name: 'CruConfiguration',
@@ -28,7 +29,7 @@ export default {
     ArrayList,
   },
   //   mixins: [CreateEditView, FormValidation],
-  mixins: [CreateEditView],
+  mixins: [CreateEditView, ResourceManager],
   props: {
     mode: {
       type: String,
@@ -47,11 +48,17 @@ export default {
   },
 
   data() {
-    return {};
+    return {
+      secondaryResourceData: this.secondaryResourceDataConfig(),
+      secrets: [],
+      configMaps: [],
+      isNamespaceNew: false,
+    };
   },
 
   async fetch() {
     await this.$store.dispatch(`cluster/findAll`, { type: WORKLOAD_TYPES.DAEMON_SET });
+    this.resourceManagerFetchSecondaryResources(this.secondaryResourceData);
   },
 
   computed: {
@@ -100,18 +107,39 @@ export default {
     },
   },
 
-  mounted() {
-    console.log('mounted');
-    // console.log('errors', this.errors);
-    console.log('value', this.value);
-    console.log('DHs', this.discoveryHandlerNames);
+  watch: {
+    async 'value.metadata.namespace'(neu) {
+      if (this.isNamespaceNew) {
+        // we don't need to re-fetch namespace specific (or non-namespace specific) resources when the namespace hasn't been created yet
+        return;
+      }
+      this.secondaryResourceData.namespace = neu;
+      // Fetch resources that are namespace specific, we don't need to re-fetch non-namespaced resources on namespace change
+      this.resourceManagerFetchSecondaryResources(this.secondaryResourceData, true);
+    },
+
+    isNamespaceNew(neu, old) {
+      if (!old && neu) {
+        // As the namespace is new any resource that's been fetched with a namespace is now invalid
+        this.resourceManagerClearSecondaryResources(this.secondaryResourceData, true);
+      }
+    },
   },
-  updated() {
-    console.log('updated');
-    // console.log('errors', this.errors);
-    console.log('value', this.value);
-    console.log('DHs', this.discoveryHandlerNames);
-    console.log('value.spec', this.value.spec);
+
+  methods: {
+    secondaryResourceDataConfig() {
+      return {
+        namespace: this.value?.metadata?.namespace || null,
+        data: {
+          [SECRET]: {
+            applyTo: [{ var: 'secrets', classify: true }],
+          },
+          [CONFIG_MAP]: {
+            applyTo: [{ var: 'configMaps', classify: false }],
+          },
+        },
+      };
+    },
   },
 };
 </script>
@@ -130,7 +158,12 @@ export default {
     @finish="save"
     @cancel="done"
   >
-    <NameNsDescription v-model="value" :mode="mode" :description-hidden="true" />
+    <NameNsDescription
+      v-model="value"
+      :mode="mode"
+      :description-hidden="true"
+      @isNamespaceNew="isNamespaceNew = $event"
+    />
     <Tabbed :side-tabs="true">
       <Tab
         name="discovery-handler"
@@ -172,6 +205,8 @@ export default {
         <div class="spacer" />
         <div class="row mb-20">
           <div class="col span-12">
+            {{ configMaps.map((cm) => cm.metadata.name) }}
+            {{ secrets.map((s) => s.metadata.name) }}
             <ArrayList
               :value="discoveryProperties"
               :mode="mode"
