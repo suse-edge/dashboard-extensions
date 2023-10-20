@@ -42,3 +42,6 @@ akri:
         discoveryDetailsYaml:
           label: Discovery handler details
           tooltip: A YAML string of discovery details that is passed to a Discovery Handler.
+        discoveryProperties:
+          label: DiscoveryProperties
+          tooltip: A list of properties fthat will be passed to discovery handler, the properties can be directly specified or read from Secret or ConfigMap.

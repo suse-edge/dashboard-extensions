@@ -5,6 +5,7 @@ import CreateEditView from '@shell/mixins/create-edit-view';
 // import FormValidation from '@shell/mixins/form-validation';
 import NameNsDescription from '@shell/components/form/NameNsDescription';
 // import LabeledSelect from '@shell/components/form/LabeledSelect';
+import ArrayList from '@shell/components/form/ArrayList';
 import Tab from '@shell/components/Tabbed/Tab';
 import Tabbed from '@shell/components/Tabbed';
 import { WORKLOAD_TYPES } from '@shell/config/types';
@@ -24,6 +25,7 @@ export default {
     UdevFields,
     LabeledInput,
     YamlEditor,
+    ArrayList,
   },
   //   mixins: [CreateEditView, FormValidation],
   mixins: [CreateEditView],
@@ -67,6 +69,14 @@ export default {
       },
       set(newValue) {
         set(this.value, 'spec.discoveryHandler.discoveryDetails', newValue);
+      },
+    },
+    discoveryProperties: {
+      get() {
+        return this.value.spec?.discoveryHandler.discoveryProperties || [];
+      },
+      set(newValue) {
+        set(this.value, 'spec.discoveryHandler.discoveryProperties', newValue);
       },
     },
     isFormValid() {
@@ -137,7 +147,7 @@ export default {
             />
           </div>
         </div> -->
-        <div class="row mb-20">
+        <div class="row">
           <div class="col span-12">
             <LabeledInput
               v-model="discoveryHandlerName"
@@ -145,22 +155,33 @@ export default {
             />
           </div>
         </div>
+        <div class="spacer" />
         <UdevFields v-if="discoveryHandlerName === 'udev'" :mode="mode" :value="value" />
-        <template v-else>
-          <h3>
-            {{ t('akri.edit.configuration.fields.discoveryDetailsYaml.label') }}
-            <i
-              v-clean-tooltip="t('akri.edit.configuration.fields.discoveryDetailsYaml.tooltip')"
-              class="icon icon-info"
+        <div v-else class="row">
+          <div class="col span-12">
+            <h3>
+              {{ t('akri.edit.configuration.fields.discoveryDetailsYaml.label') }}
+              <i
+                v-clean-tooltip="t('akri.edit.configuration.fields.discoveryDetailsYaml.tooltip')"
+                class="icon icon-info"
+              />
+            </h3>
+            <YamlEditor v-model="discoveryDetailsYaml" :mode="mode" class="yaml-editor" />
+          </div>
+        </div>
+        <div class="spacer" />
+        <div class="row mb-20">
+          <div class="col span-12">
+            <ArrayList
+              :value="discoveryProperties"
+              :mode="mode"
+              :title="t('akri.edit.configuration.fields.discoveryProperties.label')"
+              :protip="t('akri.edit.configuration.fields.discoveryProperties.description')"
+              :initial-empty-row="true"
+              @input="discoveryProperties = $event"
             />
-          </h3>
-          <YamlEditor
-            ref="yamleditor"
-            v-model="discoveryDetailsYaml"
-            :mode="mode"
-            class="yaml-editor"
-          />
-        </template>
+          </div>
+        </div>
       </Tab>
       <Tab name="brokers" :label="t('akri.edit.configuration.tabs.brokers.title')" :weight="2">
         fields for broker pods and broker jobs go here

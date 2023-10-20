@@ -81,18 +81,13 @@ export default {
         />
       </div>
     </div>
-    <div class="row mb-20">
+    <div class="row">
       <div class="col span-12">
-        <h3>
-          {{ t('akri.edit.configuration.fields.udevRules.label') }}
-        </h3>
-        <p class="padded mb-10">
-          {{ t('akri.edit.configuration.fields.udevRules.description') }}
-        </p>
         <ArrayList
           :value="udevRules"
           :mode="mode"
-          :value-label="t('akri.edit.configuration.fields.udevRules.label')"
+          :title="t('akri.edit.configuration.fields.udevRules.label')"
+          :protip="t('akri.edit.configuration.fields.udevRules.description')"
           :add-label="t('akri.edit.configuration.fields.udevRules.addLabel')"
           :initial-empty-row="true"
           value-placeholder='e.g. KERNEL=="video[0-9]*"'
