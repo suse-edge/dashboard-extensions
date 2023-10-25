@@ -21,12 +21,16 @@ akri:
       tabs:
         discoveryHandler:
           title: Discovery handler
-        brokers:
-          title: Brokers
-        services:
-          title: Services
-        other:
-          title: Other
+        brokerPod:
+          title: Broker pod
+        brokerJob:
+          title: Broker job
+        instanceService:
+          title: Instance service
+        configurationService:
+          title: Configuration service
+        capacity:
+          title: Capacity
       fields:
         discoveryHandlerType:
           label: Discovery handler type
@@ -65,3 +69,11 @@ akri:
           secret: Secret
           configMap: ConfigMap
           source: Source
+        capacity:
+          label: Capacity
+        instanceServiceSpec:
+          label: Instance service spec
+          tooltip: A specification of a service created for each broker pod.
+        configurationServiceSpec:
+          label: Configuration service spec
+          tooltip: A specification of a single service created for all broker pods of a Configuration.
