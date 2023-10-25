@@ -60,7 +60,6 @@ export default {
       const discoveryDetailsYaml = this.value.spec?.discoveryHandler?.discoveryDetails || '{}';
       try {
         const discoveryDetails = jsyaml.load(discoveryDetailsYaml);
-        console.log('discoveryDetails', discoveryDetails);
         return discoveryDetails;
       } catch (e) {
         // TODO(jtomasek) handle the error as validation error e.g. this.targetAdvancedErrors = exceptionToErrorsArray(e);

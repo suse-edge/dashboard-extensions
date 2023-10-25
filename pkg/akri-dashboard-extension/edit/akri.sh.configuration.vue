@@ -9,12 +9,13 @@ import Tab from '@shell/components/Tabbed/Tab';
 import Tabbed from '@shell/components/Tabbed';
 import { WORKLOAD_TYPES, SECRET, CONFIG_MAP } from '@shell/config/types';
 import { set } from '@shell/utils/object';
-import UdevFields from '../components/UdevFields';
 import { LabeledInput } from '@rancher/components';
 import YamlEditor from '@shell/components/YamlEditor';
 import ResourceManager from '@shell/mixins/resource-manager';
 import DiscoveryProperties from '../components/DiscoveryProperties';
 import Loading from '@shell/components/Loading';
+import UdevFields from '../components/UdevFields';
+import ObjectPropertyYamlEditor from '../components/ObjectPropertyYamlEditor';
 
 export default {
   name: 'CruConfiguration',
@@ -29,6 +30,7 @@ export default {
     YamlEditor,
     DiscoveryProperties,
     Loading,
+    ObjectPropertyYamlEditor,
   },
   //   mixins: [CreateEditView, FormValidation],
   mixins: [CreateEditView, ResourceManager],
@@ -74,7 +76,7 @@ export default {
     },
     discoveryDetailsYaml: {
       get() {
-        return this.value.spec?.discoveryHandler.discoveryDetails || '';
+        return this.value.spec?.discoveryHandler?.discoveryDetails || '';
       },
       set(newValue) {
         set(this.value, 'spec.discoveryHandler.discoveryDetails', newValue);
@@ -82,10 +84,60 @@ export default {
     },
     discoveryProperties: {
       get() {
-        return this.value.spec?.discoveryHandler.discoveryProperties || [];
+        return this.value.spec?.discoveryHandler?.discoveryProperties || [];
       },
       set(newValue) {
         set(this.value, 'spec.discoveryHandler.discoveryProperties', newValue);
+      },
+    },
+    instanceServiceSpec: {
+      get() {
+        return (
+          this.value.spec?.instanceServiceSpec || {
+            type: 'ClusterIP',
+            ports: [{ name: '', port: '', protocol: '', targetPort: '' }],
+          }
+        );
+      },
+      set(newValue) {
+        set(this.value, 'spec.instanceServiceSpec', newValue);
+      },
+    },
+    configurationServiceSpec: {
+      get() {
+        return (
+          this.value.spec?.configurationServiceSpec || {
+            type: 'ClusterIP',
+            ports: [{ name: '', port: '', protocol: '', targetPort: '' }],
+          }
+        );
+      },
+      set(newValue) {
+        set(this.value, 'spec.configurationServiceSpec', newValue);
+      },
+    },
+    capacity: {
+      get() {
+        return this.value.spec?.capacity || 1;
+      },
+      set(newValue) {
+        set(this.value, 'spec.capacity', newValue);
+      },
+    },
+    brokerPodSpec: {
+      get() {
+        return this.value.spec?.brokerSpec?.brokerPodSpec || {};
+      },
+      set(newValue) {
+        set(this.value, 'spec.brokerSpec.brokerPodSpec', newValue);
+      },
+    },
+    brokerJobSpec: {
+      get() {
+        return this.value.spec?.brokerSpec?.brokerJobSpec || {};
+      },
+      set(newValue) {
+        set(this.value, 'spec.brokerSpec.brokerJobSpec', newValue);
       },
     },
     isFormValid() {
@@ -170,7 +222,7 @@ export default {
       <Tab
         name="discovery-handler"
         :label="t('akri.edit.configuration.tabs.discoveryHandler.title')"
-        :weight="3"
+        :weight="5"
       >
         <!-- <div class="row mb-20">
           <div class="col span-12">
@@ -225,14 +277,51 @@ export default {
           </div>
         </div>
       </Tab>
-      <Tab name="brokers" :label="t('akri.edit.configuration.tabs.brokers.title')" :weight="2">
-        fields for broker pods and broker jobs go here
+      <Tab name="brokerPod" :label="t('akri.edit.configuration.tabs.brokerPod.title')" :weight="4">
+        <ObjectPropertyYamlEditor v-model="brokerPodSpec" :mode="mode" />
       </Tab>
-      <Tab name="services" :label="t('akri.edit.configuration.tabs.services.title')" :weight="1">
-        fields for instance and configuration service specs go here
+      <Tab name="brokerJob" :label="t('akri.edit.configuration.tabs.brokerJob.title')" :weight="3">
+        <ObjectPropertyYamlEditor v-model="brokerJobSpec" :mode="mode" />
       </Tab>
-      <Tab name="other" :label="t('akri.edit.configuration.tabs.other.title')" :weight="0">
-        a field for capacity goes here
+      <Tab
+        name="instanceService"
+        :label="t('akri.edit.configuration.tabs.instanceService.title')"
+        :weight="2"
+      >
+        <p class="mb-10">
+          {{ t('akri.edit.configuration.fields.instanceServiceSpec.label') }}
+          <i
+            v-clean-tooltip="t('akri.edit.configuration.fields.instanceServiceSpec.tooltip')"
+            class="icon icon-info"
+          />
+        </p>
+        <ObjectPropertyYamlEditor v-model="instanceServiceSpec" :mode="mode" />
+      </Tab>
+      <Tab
+        name="configurationService"
+        :label="t('akri.edit.configuration.tabs.configurationService.title')"
+        :weight="1"
+      >
+        <p class="mb-10">
+          {{ t('akri.edit.configuration.fields.configurationServiceSpec.label') }}
+          <i
+            v-clean-tooltip="t('akri.edit.configuration.fields.configurationServiceSpec.tooltip')"
+            class="icon icon-info"
+          />
+        </p>
+        <ObjectPropertyYamlEditor v-model="configurationServiceSpec" :mode="mode" />
+      </Tab>
+      <Tab name="capacity" :label="t('akri.edit.configuration.tabs.capacity.title')" :weight="0">
+        <div class="row">
+          <div class="col span-6">
+            <LabeledInput
+              v-model="capacity"
+              type="number"
+              :label="t('akri.edit.configuration.fields.capacity.label')"
+              min="1"
+            />
+          </div>
+        </div>
       </Tab>
     </Tabbed>
   </CruResource>
