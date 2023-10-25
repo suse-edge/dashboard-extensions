@@ -1,10 +1,11 @@
 <script>
+import Vue from 'vue';
 import { _CREATE } from '@shell/config/query-params';
 import CruResource from '@shell/components/CruResource';
 import CreateEditView from '@shell/mixins/create-edit-view';
 // import FormValidation from '@shell/mixins/form-validation';
 import NameNsDescription from '@shell/components/form/NameNsDescription';
-// import LabeledSelect from '@shell/components/form/LabeledSelect';
+import LabeledSelect from '@shell/components/form/LabeledSelect';
 import Tab from '@shell/components/Tabbed/Tab';
 import Tabbed from '@shell/components/Tabbed';
 import { WORKLOAD_TYPES, SECRET, CONFIG_MAP } from '@shell/config/types';
@@ -24,7 +25,7 @@ export default {
     NameNsDescription,
     Tabbed,
     Tab,
-    // LabeledSelect,
+    LabeledSelect,
     UdevFields,
     LabeledInput,
     YamlEditor,
@@ -57,6 +58,7 @@ export default {
       secrets: [],
       configMaps: [],
       isNamespaceNew: false,
+      defineCustomDiscoveryHandlerName: false,
     };
   },
 
@@ -151,33 +153,42 @@ export default {
         ...this.allDaemonSets
           .filter((daemonSet) => daemonSet.metadata.annotations['akri.sh.discoveryHandlerName'])
           .map((dh) => dh.metadata.annotations['akri.sh.discoveryHandlerName']),
-        'custom',
       ];
     },
-    discoveryHandlerTypes() {
-      return this.allDaemonSets
-        .filter((daemonSet) => daemonSet.metadata.annotations['akri.sh.discoveryHandlerType'])
-        .map((dh) => dh.metadata.annotations['akri.sh.discoveryHandlerType']);
+    discoveryHandlerNameOptions() {
+      return [
+        ...this.discoveryHandlerNames,
+        { label: 'divider', disabled: true, kind: 'divider' },
+        {
+          label: this.t(
+            'akri.edit.configuration.fields.discoveryHandlerName.customNameOptionLabel'
+          ),
+          value: '',
+          kind: 'highlighted',
+        },
+      ];
+    },
+    showDiscoveryHandlerNameSelect() {
+      return this.discoveryHandlerNames.length && !this.defineCustomDiscoveryHandlerName;
     },
   },
 
   watch: {
-    async 'value.metadata.namespace'(neu) {
-      if (this.isNamespaceNew) {
-        // we don't need to re-fetch namespace specific (or non-namespace specific) resources when the namespace hasn't been created yet
-        return;
-      }
-      this.secondaryResourceData.namespace = neu;
-      // Fetch resources that are namespace specific, we don't need to re-fetch non-namespaced resources on namespace change
-      this.resourceManagerFetchSecondaryResources(this.secondaryResourceData, true);
-    },
-
-    isNamespaceNew(neu, old) {
-      if (!old && neu) {
-        // As the namespace is new any resource that's been fetched with a namespace is now invalid
-        this.resourceManagerClearSecondaryResources(this.secondaryResourceData, true);
-      }
-    },
+    // async 'value.metadata.namespace'(neu) {
+    //   if (this.isNamespaceNew) {
+    //     // we don't need to re-fetch namespace specific (or non-namespace specific) resources when the namespace hasn't been created yet
+    //     return;
+    //   }
+    //   this.secondaryResourceData.namespace = neu;
+    //   // Fetch resources that are namespace specific, we don't need to re-fetch non-namespaced resources on namespace change
+    //   this.resourceManagerFetchSecondaryResources(this.secondaryResourceData, true);
+    // },
+    // isNamespaceNew(neu, old) {
+    //   if (!old && neu) {
+    //     // As the namespace is new any resource that's been fetched with a namespace is now invalid
+    //     this.resourceManagerClearSecondaryResources(this.secondaryResourceData, true);
+    //   }
+    // },
   },
 
   methods: {
@@ -193,6 +204,19 @@ export default {
           },
         },
       };
+    },
+    handleSelectDiscoveryHandlerName(e) {
+      if (!e || e.value === '') {
+        // The blank value in the dropdown is labeled "Define custom discovery handler name"
+        this.defineCustomDiscoveryHandlerName = true;
+        Vue.nextTick(() => this.$refs.discoveryHandlerName.focus());
+      } else {
+        this.defineCustomDiscoveryHandlerName = false;
+      }
+    },
+    cancelCustomDiscoveryHandlerName() {
+      this.defineCustomDiscoveryHandlerName = false;
+      this.discoveryHandlerName = this.discoveryHandlerNames[0];
     },
   },
 };
@@ -224,22 +248,35 @@ export default {
         :label="t('akri.edit.configuration.tabs.discoveryHandler.title')"
         :weight="5"
       >
-        <!-- <div class="row mb-20">
-          <div class="col span-12">
-            <LabeledSelect
-              v-model="discoveryHandlerName"
-              :label="t('akri.edit.configuration.fields.discoveryHandlerName.label')"
-              :options="discoveryHandlerNames"
-              :mode="mode"
-            />
-          </div>
-        </div> -->
         <div class="row">
-          <div class="col span-12">
-            <LabeledInput
+          <div class="col span-6">
+            <LabeledSelect
+              v-if="showDiscoveryHandlerNameSelect"
               v-model="discoveryHandlerName"
               :label="t('akri.edit.configuration.fields.discoveryHandlerName.label')"
+              :options="discoveryHandlerNameOptions"
+              :mode="mode"
+              :clearable="true"
+              required
+              :loading="isLoadingSecondaryResources"
+              @selecting="handleSelectDiscoveryHandlerName"
             />
+            <div v-if="!showDiscoveryHandlerNameSelect">
+              <LabeledInput
+                ref="discoveryHandlerName"
+                v-model="discoveryHandlerName"
+                :mode="mode"
+                :label="t('akri.edit.configuration.fields.discoveryHandlerName.label')"
+              />
+              <button
+                v-if="discoveryHandlerNames.length"
+                aria="Cancel"
+                class="cancel-custom-name"
+                @click="cancelCustomDiscoveryHandlerName"
+              >
+                <i v-clean-tooltip="t('generic.cancel')" class="icon icon-close align-value" />
+              </button>
+            </div>
           </div>
         </div>
         <div class="spacer" />
@@ -326,3 +363,20 @@ export default {
     </Tabbed>
   </CruResource>
 </template>
+
+<style lang="scss" scoped>
+button.cancel-custom-name {
+  all: unset;
+  height: 0;
+  position: relative;
+  top: -35px;
+  float: right;
+  margin-right: 7px;
+
+  cursor: pointer;
+
+  .align-value {
+    padding-top: 7px;
+  }
+}
+</style>
