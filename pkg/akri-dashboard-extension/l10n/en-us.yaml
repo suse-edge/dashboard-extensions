@@ -45,3 +45,23 @@ akri:
         discoveryProperties:
           label: DiscoveryProperties
           tooltip: A list of properties fthat will be passed to discovery handler, the properties can be directly specified or read from Secret or ConfigMap.
+          addLabel: Add property
+          type: Property type
+          types:
+            keyValue: Key/Value pair
+            secretRef: Secret
+            secretKeyRef: Secret key
+            configMapRef: ConfigMap
+            configMapKeyRef: ConfigMap key
+          name:
+            label: Property name
+            placeholder: 'e.g. FOO'
+          value:
+            label: Property value
+            placeholder: 'e.g. bar'
+          key:
+            label: Key
+            placeholder: "e.g. metadata.labels['<KEY>']"
+          secret: Secret
+          configMap: ConfigMap
+          source: Source

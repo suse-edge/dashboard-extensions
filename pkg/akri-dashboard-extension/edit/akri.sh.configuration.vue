@@ -5,7 +5,6 @@ import CreateEditView from '@shell/mixins/create-edit-view';
 // import FormValidation from '@shell/mixins/form-validation';
 import NameNsDescription from '@shell/components/form/NameNsDescription';
 // import LabeledSelect from '@shell/components/form/LabeledSelect';
-import ArrayList from '@shell/components/form/ArrayList';
 import Tab from '@shell/components/Tabbed/Tab';
 import Tabbed from '@shell/components/Tabbed';
 import { WORKLOAD_TYPES, SECRET, CONFIG_MAP } from '@shell/config/types';
@@ -14,6 +13,8 @@ import UdevFields from '../components/UdevFields';
 import { LabeledInput } from '@rancher/components';
 import YamlEditor from '@shell/components/YamlEditor';
 import ResourceManager from '@shell/mixins/resource-manager';
+import DiscoveryProperties from '../components/DiscoveryProperties';
+import Loading from '@shell/components/Loading';
 
 export default {
   name: 'CruConfiguration',
@@ -26,7 +27,8 @@ export default {
     UdevFields,
     LabeledInput,
     YamlEditor,
-    ArrayList,
+    DiscoveryProperties,
+    Loading,
   },
   //   mixins: [CreateEditView, FormValidation],
   mixins: [CreateEditView, ResourceManager],
@@ -129,7 +131,7 @@ export default {
   methods: {
     secondaryResourceDataConfig() {
       return {
-        namespace: this.value?.metadata?.namespace || null,
+        // namespace: this.value?.metadata?.namespace || null,
         data: {
           [SECRET]: {
             applyTo: [{ var: 'secrets', classify: true }],
@@ -205,14 +207,19 @@ export default {
         <div class="spacer" />
         <div class="row mb-20">
           <div class="col span-12">
-            {{ configMaps.map((cm) => cm.metadata.name) }}
-            {{ secrets.map((s) => s.metadata.name) }}
-            <ArrayList
-              :value="discoveryProperties"
+            <h3>
+              {{ t('akri.edit.configuration.fields.discoveryProperties.label') }}
+              <i
+                v-clean-tooltip="t('akri.edit.configuration.fields.discoveryProperties.tooltip')"
+                class="icon icon-info"
+              />
+            </h3>
+            <DiscoveryProperties
               :mode="mode"
-              :title="t('akri.edit.configuration.fields.discoveryProperties.label')"
-              :protip="t('akri.edit.configuration.fields.discoveryProperties.description')"
-              :initial-empty-row="true"
+              :config-maps="configMaps"
+              :secrets="secrets"
+              :value="discoveryProperties"
+              :loading="isLoadingSecondaryResources"
               @input="discoveryProperties = $event"
             />
           </div>
