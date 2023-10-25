@@ -36,6 +36,7 @@ akri:
           label: Discovery handler type
         discoveryHandlerName:
           label: Discovery handler name
+          customNameOptionLabel: Define custom discovery handler name
         udevRules:
           label: Udev rules
           addLabel: Add rule
