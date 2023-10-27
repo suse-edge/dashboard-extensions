@@ -1,11 +1,9 @@
 <script>
-import Vue from 'vue';
 import { _CREATE } from '@shell/config/query-params';
 import CruResource from '@shell/components/CruResource';
 import CreateEditView from '@shell/mixins/create-edit-view';
 // import FormValidation from '@shell/mixins/form-validation';
 import NameNsDescription from '@shell/components/form/NameNsDescription';
-import LabeledSelect from '@shell/components/form/LabeledSelect';
 import Tab from '@shell/components/Tabbed/Tab';
 import Tabbed from '@shell/components/Tabbed';
 import { WORKLOAD_TYPES, SECRET, CONFIG_MAP } from '@shell/config/types';
@@ -16,7 +14,7 @@ import ResourceManager from '@shell/mixins/resource-manager';
 import DiscoveryProperties from '../components/DiscoveryProperties';
 import Loading from '@shell/components/Loading';
 import UdevFields from '../components/UdevFields';
-import ObjectPropertyYamlEditor from '../components/ObjectPropertyYamlEditor';
+import DiscoveryHandlerNameField from '../components/DiscoveryHandlerNameField';
 
 export default {
   name: 'CruConfiguration',
@@ -25,13 +23,12 @@ export default {
     NameNsDescription,
     Tabbed,
     Tab,
-    LabeledSelect,
     UdevFields,
     LabeledInput,
     YamlEditor,
     DiscoveryProperties,
     Loading,
-    ObjectPropertyYamlEditor,
+    DiscoveryHandlerNameField,
   },
   //   mixins: [CreateEditView, FormValidation],
   mixins: [CreateEditView, ResourceManager],
@@ -57,13 +54,13 @@ export default {
       secondaryResourceData: this.secondaryResourceDataConfig(),
       secrets: [],
       configMaps: [],
+      allDaemonSets: [],
       isNamespaceNew: false,
       defineCustomDiscoveryHandlerName: false,
     };
   },
 
   async fetch() {
-    await this.$store.dispatch(`cluster/findAll`, { type: WORKLOAD_TYPES.DAEMON_SET });
     this.resourceManagerFetchSecondaryResources(this.secondaryResourceData);
   },
 
@@ -145,9 +142,6 @@ export default {
     isFormValid() {
       return !!this.value.name;
     },
-    allDaemonSets() {
-      return this.$store.getters['cluster/all'](WORKLOAD_TYPES.DAEMON_SET) || [];
-    },
     discoveryHandlerNames() {
       return [
         ...this.allDaemonSets
@@ -155,68 +149,23 @@ export default {
           .map((dh) => dh.metadata.annotations['akri.sh.discoveryHandlerName']),
       ];
     },
-    discoveryHandlerNameOptions() {
-      return [
-        ...this.discoveryHandlerNames,
-        { label: 'divider', disabled: true, kind: 'divider' },
-        {
-          label: this.t(
-            'akri.edit.configuration.fields.discoveryHandlerName.customNameOptionLabel'
-          ),
-          value: '',
-          kind: 'highlighted',
-        },
-      ];
-    },
-    showDiscoveryHandlerNameSelect() {
-      return this.discoveryHandlerNames.length && !this.defineCustomDiscoveryHandlerName;
-    },
-  },
-
-  watch: {
-    // async 'value.metadata.namespace'(neu) {
-    //   if (this.isNamespaceNew) {
-    //     // we don't need to re-fetch namespace specific (or non-namespace specific) resources when the namespace hasn't been created yet
-    //     return;
-    //   }
-    //   this.secondaryResourceData.namespace = neu;
-    //   // Fetch resources that are namespace specific, we don't need to re-fetch non-namespaced resources on namespace change
-    //   this.resourceManagerFetchSecondaryResources(this.secondaryResourceData, true);
-    // },
-    // isNamespaceNew(neu, old) {
-    //   if (!old && neu) {
-    //     // As the namespace is new any resource that's been fetched with a namespace is now invalid
-    //     this.resourceManagerClearSecondaryResources(this.secondaryResourceData, true);
-    //   }
-    // },
   },
 
   methods: {
     secondaryResourceDataConfig() {
       return {
-        // namespace: this.value?.metadata?.namespace || null,
         data: {
           [SECRET]: {
-            applyTo: [{ var: 'secrets', classify: true }],
+            applyTo: [{ var: 'secrets', classify: false }],
           },
           [CONFIG_MAP]: {
             applyTo: [{ var: 'configMaps', classify: false }],
           },
+          [WORKLOAD_TYPES.DAEMON_SET]: {
+            applyTo: [{ var: 'allDaemonSets', classify: false }],
+          },
         },
       };
-    },
-    handleSelectDiscoveryHandlerName(e) {
-      if (!e || e.value === '') {
-        // The blank value in the dropdown is labeled "Define custom discovery handler name"
-        this.defineCustomDiscoveryHandlerName = true;
-        Vue.nextTick(() => this.$refs.discoveryHandlerName.focus());
-      } else {
-        this.defineCustomDiscoveryHandlerName = false;
-      }
-    },
-    cancelCustomDiscoveryHandlerName() {
-      this.defineCustomDiscoveryHandlerName = false;
-      this.discoveryHandlerName = this.discoveryHandlerNames[0];
     },
   },
 };
@@ -250,33 +199,12 @@ export default {
       >
         <div class="row">
           <div class="col span-6">
-            <LabeledSelect
-              v-if="showDiscoveryHandlerNameSelect"
+            <DiscoveryHandlerNameField
               v-model="discoveryHandlerName"
-              :label="t('akri.edit.configuration.fields.discoveryHandlerName.label')"
-              :options="discoveryHandlerNameOptions"
               :mode="mode"
-              :clearable="true"
-              required
+              :discovery-handler-names="discoveryHandlerNames"
               :loading="isLoadingSecondaryResources"
-              @selecting="handleSelectDiscoveryHandlerName"
             />
-            <div v-if="!showDiscoveryHandlerNameSelect">
-              <LabeledInput
-                ref="discoveryHandlerName"
-                v-model="discoveryHandlerName"
-                :mode="mode"
-                :label="t('akri.edit.configuration.fields.discoveryHandlerName.label')"
-              />
-              <button
-                v-if="discoveryHandlerNames.length"
-                aria="Cancel"
-                class="cancel-custom-name"
-                @click="cancelCustomDiscoveryHandlerName"
-              >
-                <i v-clean-tooltip="t('generic.cancel')" class="icon icon-close align-value" />
-              </button>
-            </div>
           </div>
         </div>
         <div class="spacer" />
@@ -315,10 +243,10 @@ export default {
         </div>
       </Tab>
       <Tab name="brokerPod" :label="t('akri.edit.configuration.tabs.brokerPod.title')" :weight="4">
-        <ObjectPropertyYamlEditor v-model="brokerPodSpec" :mode="mode" />
+        <YamlEditor v-model="brokerPodSpec" :as-object="true" :mode="mode" class="yaml-editor" />
       </Tab>
       <Tab name="brokerJob" :label="t('akri.edit.configuration.tabs.brokerJob.title')" :weight="3">
-        <ObjectPropertyYamlEditor v-model="brokerJobSpec" :mode="mode" />
+        <YamlEditor v-model="brokerJobSpec" :as-object="true" :mode="mode" class="yaml-editor" />
       </Tab>
       <Tab
         name="instanceService"
@@ -332,7 +260,12 @@ export default {
             class="icon icon-info"
           />
         </p>
-        <ObjectPropertyYamlEditor v-model="instanceServiceSpec" :mode="mode" />
+        <YamlEditor
+          v-model="instanceServiceSpec"
+          :as-object="true"
+          :mode="mode"
+          class="yaml-editor"
+        />
       </Tab>
       <Tab
         name="configurationService"
@@ -346,7 +279,13 @@ export default {
             class="icon icon-info"
           />
         </p>
-        <ObjectPropertyYamlEditor v-model="configurationServiceSpec" :mode="mode" />
+        <YamlEditor
+          ref="configurationServiceRef"
+          v-model="configurationServiceSpec"
+          :as-object="true"
+          :mode="mode"
+          class="yaml-editor"
+        />
       </Tab>
       <Tab name="capacity" :label="t('akri.edit.configuration.tabs.capacity.title')" :weight="0">
         <div class="row">
@@ -363,20 +302,3 @@ export default {
     </Tabbed>
   </CruResource>
 </template>
-
-<style lang="scss" scoped>
-button.cancel-custom-name {
-  all: unset;
-  height: 0;
-  position: relative;
-  top: -35px;
-  float: right;
-  margin-right: 7px;
-
-  cursor: pointer;
-
-  .align-value {
-    padding-top: 7px;
-  }
-}
-</style>
