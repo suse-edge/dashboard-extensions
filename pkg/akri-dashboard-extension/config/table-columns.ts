@@ -54,3 +54,26 @@ export const NODES: HeaderOptions = {
   sort: 'nodeNames',
   search: 'nodeNames',
 };
+
+export const DISCOVERY_HANDLER_NAME: HeaderOptions = {
+  name: 'discoveryHandlerName',
+  labelKey: 'akri.tableHeaders.discoveryHandlerName',
+  value: 'discoveryHandlerName',
+  sort: 'discoveryHandlerName',
+  search: 'discoveryHandlerName',
+};
+
+export const INSTANCES_COUNT: HeaderOptions = {
+  name: 'instancesCount',
+  labelKey: 'akri.tableHeaders.instancesCount',
+  value: 'instancesCount',
+  sort: 'instancesCount',
+  formatter: 'InstancesCountLink',
+};
+
+export const CAPACITY: HeaderOptions = {
+  name: 'capacity',
+  labelKey: 'akri.tableHeaders.capacity',
+  value: 'capacity',
+  sort: 'capacity',
+};
