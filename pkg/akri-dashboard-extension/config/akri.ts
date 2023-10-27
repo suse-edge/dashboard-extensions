@@ -7,6 +7,9 @@ import {
   CONFIGURATION_NAME,
   NODES,
   SHARED,
+  INSTANCES_COUNT,
+  CAPACITY,
+  DISCOVERY_HANDLER_NAME,
 } from './table-columns';
 
 // This allows expanding ConfigureTypeFunction because isEditable and listGroups is not included
@@ -57,4 +60,15 @@ export function init(plugin: IPlugin, store: any) {
   ];
 
   headers(ResourceNames.INSTANCE, instanceTableHeaders);
+
+  const configurationTableHeaders: HeaderOptions[] = [
+    STATE,
+    NAME,
+    NAMESPACE,
+    DISCOVERY_HANDLER_NAME,
+    INSTANCES_COUNT,
+    CAPACITY,
+  ];
+
+  headers(ResourceNames.CONFIGURATION, configurationTableHeaders);
 }

@@ -11,6 +11,9 @@ akri:
     brokerJobsCount: Broker jobs
     shared: Shared
     nodes: Nodes
+    instancesCount: Instances
+    discoveryHandlerName: DiscoveryHandler
+    capacity: Capacity
   resourceTable:
     groupBy:
       configurationName: Group by Configuration
