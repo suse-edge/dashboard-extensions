@@ -26,6 +26,10 @@ export default {
       type: String,
       default: POD,
     },
+    locationHash: {
+      type: String,
+      default: '',
+    },
   },
 
   async fetch() {
@@ -34,7 +38,7 @@ export default {
 
   computed: {
     to() {
-      return this.row?.detailLocation;
+      return { ...this.row?.detailLocation, hash: this.locationHash };
     },
   },
 };
