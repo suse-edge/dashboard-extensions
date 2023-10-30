@@ -120,7 +120,7 @@ export default {
         return this.value.spec?.capacity || 1;
       },
       set(newValue) {
-        set(this.value, 'spec.capacity', newValue);
+        set(this.value, 'spec.capacity', parseInt(newValue));
       },
     },
     brokerPodSpec: {

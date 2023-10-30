@@ -19,6 +19,13 @@ akri:
       configurationName: Group by Configuration
     groupLabel:
       configuration: '<span>Configuration:</span> {name}'
+  resourceTabs:
+    instances:
+      tab: Instances
+    brokerPods:
+      tab: Broker pods
+    brokerJobs:
+      tab: Broker jobs
   edit:
     configuration:
       tabs:

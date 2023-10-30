@@ -36,7 +36,7 @@ export default {
 
   computed: {
     to() {
-      return this.row?.detailLocation;
+      return { ...this.row?.detailLocation, hash: '#instances' };
     },
   },
 };

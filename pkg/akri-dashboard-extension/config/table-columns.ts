@@ -24,6 +24,7 @@ export const BROKER_PODS_COUNT: HeaderOptions = {
   formatter: 'AkriWorkloadDetailTabLink',
   formatterOpts: {
     fetchedResourceType: POD,
+    locationHash: '#brokerPods',
   },
 };
 
@@ -35,6 +36,7 @@ export const BROKER_JOBS_COUNT: HeaderOptions = {
   formatter: 'AkriWorkloadDetailTabLink',
   formatterOpts: {
     fetchedResourceType: WORKLOAD_TYPES.JOB,
+    locationHash: '#brokerJobs',
   },
 };
 
