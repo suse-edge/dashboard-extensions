@@ -48,26 +48,35 @@ export default {
 };
 </script>
 <template>
-  <ResourceTabs mode="view" class="mt-20" :value="value">
-    <Tab label-key="akri.resourceTabs.brokerPods.tab" name="brokerPods" :weight="-1">
-      <ResourceTable
-        :rows="value.brokerPods"
-        :headers="podHeaders"
-        key-field="id"
-        :schema="podSchema"
-        :groupable="false"
-        :search="false"
-      />
-    </Tab>
-    <Tab label-key="akri.resourceTabs.brokerJobs.tab" name="brokerJobs" :weight="-2">
-      <ResourceTable
-        :rows="value.brokerJobs"
-        :headers="podHeaders"
-        key-field="id"
-        :schema="podSchema"
-        :groupable="false"
-        :search="false"
-      />
-    </Tab>
-  </ResourceTabs>
+  <div>
+    <ResourceTabs mode="view" class="mt-20" :value="value">
+      <Tab label-key="akri.resourceTabs.details.tab" name="details" :weight="-1">
+        <h3>Broker properties</h3>
+        <dl v-for="(property, key) in value.spec.brokerProperties" :key="property">
+          <dt>{{ key }}</dt>
+          <dd>{{ property }}</dd>
+        </dl>
+      </Tab>
+      <Tab label-key="akri.resourceTabs.brokerPods.tab" name="brokerPods" :weight="-2">
+        <ResourceTable
+          :rows="value.brokerPods"
+          :headers="podHeaders"
+          key-field="id"
+          :schema="podSchema"
+          :groupable="false"
+          :search="false"
+        />
+      </Tab>
+      <Tab label-key="akri.resourceTabs.brokerJobs.tab" name="brokerJobs" :weight="-2">
+        <ResourceTable
+          :rows="value.brokerJobs"
+          :headers="podHeaders"
+          key-field="id"
+          :schema="podSchema"
+          :groupable="false"
+          :search="false"
+        />
+      </Tab>
+    </ResourceTabs>
+  </div>
 </template>
