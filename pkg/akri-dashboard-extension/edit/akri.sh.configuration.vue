@@ -147,7 +147,8 @@ export default {
       return [
         ...this.allDaemonSets
           .filter((daemonSet) => daemonSet.metadata.annotations[DISCOVERY_HANDLER_NAME_ANNOTATION])
-          .map((dh) => dh.metadata.annotations[DISCOVERY_HANDLER_NAME_ANNOTATION]),
+          .map((dh) => dh.metadata.annotations[DISCOVERY_HANDLER_NAME_ANNOTATION])
+          .sort(),
       ];
     },
   },
