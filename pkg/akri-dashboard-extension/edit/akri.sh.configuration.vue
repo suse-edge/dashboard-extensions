@@ -11,8 +11,9 @@ import { set } from '@shell/utils/object';
 import { LabeledInput } from '@rancher/components';
 import YamlEditor from '@shell/components/YamlEditor';
 import ResourceManager from '@shell/mixins/resource-manager';
-import DiscoveryProperties from '../components/DiscoveryProperties';
 import Loading from '@shell/components/Loading';
+import DiscoveryProperties from '../components/DiscoveryProperties';
+import { DISCOVERY_HANDLER_NAME_ANNOTATION } from '../config/constants';
 import UdevFields from '../components/UdevFields';
 import DiscoveryHandlerNameField from '../components/DiscoveryHandlerNameField';
 
@@ -145,8 +146,8 @@ export default {
     discoveryHandlerNames() {
       return [
         ...this.allDaemonSets
-          .filter((daemonSet) => daemonSet.metadata.annotations['akri.sh.discoveryHandlerName'])
-          .map((dh) => dh.metadata.annotations['akri.sh.discoveryHandlerName']),
+          .filter((daemonSet) => daemonSet.metadata.annotations[DISCOVERY_HANDLER_NAME_ANNOTATION])
+          .map((dh) => dh.metadata.annotations[DISCOVERY_HANDLER_NAME_ANNOTATION]),
       ];
     },
   },
