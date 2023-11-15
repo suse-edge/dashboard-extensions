@@ -9,3 +9,5 @@ export const AkriLabelKeys = {
   INSTANCE: 'akri.sh/instance',
   CONFIGURATION: 'akri.sh/configuration',
 };
+
+export const DISCOVERY_HANDLER_NAME_ANNOTATION = 'akri.sh/discoveryHandlerName';
