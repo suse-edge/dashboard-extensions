@@ -20,6 +20,8 @@ akri:
     groupLabel:
       configuration: '<span>Configuration:</span> {name}'
   resourceTabs:
+    details:
+      tab: Details
     instances:
       tab: Instances
     brokerPods:
