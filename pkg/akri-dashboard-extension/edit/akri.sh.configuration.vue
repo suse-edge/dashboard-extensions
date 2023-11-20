@@ -1,5 +1,5 @@
 <script>
-import { _CREATE } from '@shell/config/query-params';
+import { _CREATE, _VIEW } from '@shell/config/query-params';
 import CruResource from '@shell/components/CruResource';
 import CreateEditView from '@shell/mixins/create-edit-view';
 // import FormValidation from '@shell/mixins/form-validation';
@@ -9,7 +9,7 @@ import Tabbed from '@shell/components/Tabbed';
 import { WORKLOAD_TYPES, SECRET, CONFIG_MAP } from '@shell/config/types';
 import { set } from '@shell/utils/object';
 import { LabeledInput } from '@rancher/components';
-import YamlEditor from '@shell/components/YamlEditor';
+import YamlEditor, { EDITOR_MODES } from '@shell/components/YamlEditor';
 import ResourceManager from '@shell/mixins/resource-manager';
 import Loading from '@shell/components/Loading';
 import DiscoveryProperties from '../components/DiscoveryProperties';
@@ -66,6 +66,13 @@ export default {
   },
 
   computed: {
+    editorMode() {
+      return this.isView || this.viewCode ? EDITOR_MODES.VIEW_CODE : EDITOR_MODES.EDIT_CODE;
+    },
+
+    isView() {
+      return this.mode === _VIEW;
+    },
     discoveryHandlerName: {
       get() {
         return this.value?.spec?.discoveryHandler?.name || '';
@@ -220,7 +227,11 @@ export default {
                 class="icon icon-info"
               />
             </h3>
-            <YamlEditor v-model="discoveryDetailsYaml" :mode="mode" class="yaml-editor" />
+            <YamlEditor
+              v-model="discoveryDetailsYaml"
+              :editor-mode="editorMode"
+              class="yaml-editor"
+            />
           </div>
         </div>
         <div class="spacer" />
@@ -245,10 +256,20 @@ export default {
         </div>
       </Tab>
       <Tab name="brokerPod" :label="t('akri.edit.configuration.tabs.brokerPod.title')" :weight="4">
-        <YamlEditor v-model="brokerPodSpec" :as-object="true" :mode="mode" class="yaml-editor" />
+        <YamlEditor
+          v-model="brokerPodSpec"
+          :as-object="true"
+          :editor-mode="editorMode"
+          class="yaml-editor"
+        />
       </Tab>
       <Tab name="brokerJob" :label="t('akri.edit.configuration.tabs.brokerJob.title')" :weight="3">
-        <YamlEditor v-model="brokerJobSpec" :as-object="true" :mode="mode" class="yaml-editor" />
+        <YamlEditor
+          v-model="brokerJobSpec"
+          :as-object="true"
+          :editor-mode="editorMode"
+          class="yaml-editor"
+        />
       </Tab>
       <Tab
         name="instanceService"
@@ -265,7 +286,7 @@ export default {
         <YamlEditor
           v-model="instanceServiceSpec"
           :as-object="true"
-          :mode="mode"
+          :editor-mode="editorMode"
           class="yaml-editor"
         />
       </Tab>
@@ -282,10 +303,10 @@ export default {
           />
         </p>
         <YamlEditor
-          ref="configurationServiceRef"
+          ref="configurationServiceSpecRef"
           v-model="configurationServiceSpec"
           :as-object="true"
-          :mode="mode"
+          :editor-mode="editorMode"
           class="yaml-editor"
         />
       </Tab>
