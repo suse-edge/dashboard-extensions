@@ -176,6 +176,9 @@ export default {
         },
       };
     },
+    onTabChanged({ tab }) {
+      this.$refs[`${tab.name}EditorRef`]?.refresh();
+    },
   },
 };
 </script>
@@ -200,9 +203,9 @@ export default {
       :description-hidden="true"
       @isNamespaceNew="isNamespaceNew = $event"
     />
-    <Tabbed :side-tabs="true">
+    <Tabbed :side-tabs="true" @changed="onTabChanged">
       <Tab
-        name="discovery-handler"
+        name="discoveryHandler"
         :label="t('akri.edit.configuration.tabs.discoveryHandler.title')"
         :weight="5"
       >
@@ -228,6 +231,7 @@ export default {
               />
             </h3>
             <YamlEditor
+              ref="discoveryHandlerEditorRef"
               v-model="discoveryDetailsYaml"
               :editor-mode="editorMode"
               class="yaml-editor"
@@ -257,6 +261,7 @@ export default {
       </Tab>
       <Tab name="brokerPod" :label="t('akri.edit.configuration.tabs.brokerPod.title')" :weight="4">
         <YamlEditor
+          ref="brokerPodEditorRef"
           v-model="brokerPodSpec"
           :as-object="true"
           :editor-mode="editorMode"
@@ -265,6 +270,7 @@ export default {
       </Tab>
       <Tab name="brokerJob" :label="t('akri.edit.configuration.tabs.brokerJob.title')" :weight="3">
         <YamlEditor
+          ref="brokerJobEditorRef"
           v-model="brokerJobSpec"
           :as-object="true"
           :editor-mode="editorMode"
@@ -284,6 +290,7 @@ export default {
           />
         </p>
         <YamlEditor
+          ref="instanceServiceEditorRef"
           v-model="instanceServiceSpec"
           :as-object="true"
           :editor-mode="editorMode"
@@ -303,7 +310,7 @@ export default {
           />
         </p>
         <YamlEditor
-          ref="configurationServiceSpecRef"
+          ref="configurationServiceEditorRef"
           v-model="configurationServiceSpec"
           :as-object="true"
           :editor-mode="editorMode"
