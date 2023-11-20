@@ -79,3 +79,22 @@ export default {
     </n-link>
   </span>
 </template>
+
+<style scoped>
+.badge-state.bg-info {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--primary),
+    var(--primary) 5px,
+    #297db3 5px,
+    #297db3 10px
+  );
+  background-size: 400% 400%;
+  animation: barberpole 10s linear infinite;
+}
+@keyframes barberpole {
+  100% {
+    background-position: 100% 100%;
+  }
+}
+</style>
