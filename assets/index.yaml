@@ -1,21 +1,43 @@
 apiVersion: v1
 entries:
-  kubevirt-dashboard-extension:
+  akri-dashboard-extension:
   - annotations:
       catalog.cattle.io/certified: rancher
-      catalog.cattle.io/display-name: KubeVirt
-      catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.28.0-0'
+      catalog.cattle.io/display-name: Akri
+      catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.29.0-0'
       catalog.cattle.io/namespace: cattle-ui-plugin-system
       catalog.cattle.io/os: linux
       catalog.cattle.io/permits-os: linux, windows
-      catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.8.0-0'
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.9.0-0'
       catalog.cattle.io/scope: management
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-08-07T17:06:40.912066147Z"
+    created: "2023-11-23T10:10:01.145078896Z"
+    description: 'SUSE Edge: Akri extension for Rancher Dashboard'
+    digest: 6a467900c7eb561b53ec05c6be4b75b32753aead83a4ac80c60d1813c0319563
+    icon: https://raw.githubusercontent.com/cncf/artwork/master/projects/akri/icon/light/akri-icon-light.svg
+    name: akri-dashboard-extension
+    type: application
+    urls:
+    - assets/akri-dashboard-extension/akri-dashboard-extension-0.1.0.tgz
+    version: 0.1.0
+  kubevirt-dashboard-extension:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: KubeVirt
+      catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.29.0-0'
+      catalog.cattle.io/namespace: cattle-ui-plugin-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux, windows
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.9.0-0'
+      catalog.cattle.io/scope: management
+      catalog.cattle.io/ui-component: plugins
+    apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-11-23T10:10:01.145307331Z"
     description: 'SUSE Edge: KubeVirt extension for Rancher Dashboard'
-    digest: 61b9323cefec25579aa550777c324b0ff9d28d25deb0da683c73458936de9545
+    digest: 170be98c41fe669e64ac7ffa92ca96a0b1d817db8768e49420085ba8338bfa96
     icon: https://raw.githubusercontent.com/cncf/artwork/master/projects/kubevirt/icon/color/kubevirt-icon-color.svg
     name: kubevirt-dashboard-extension
     type: application
@@ -25,21 +47,21 @@ entries:
   test:
   - annotations:
       catalog.cattle.io/certified: rancher
-      catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.28.0-0'
+      catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.29.0-0'
       catalog.cattle.io/namespace: cattle-ui-plugin-system
       catalog.cattle.io/os: linux
       catalog.cattle.io/permits-os: linux, windows
-      catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.8.0-0'
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.9.0-0'
       catalog.cattle.io/scope: management
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-08-07T17:06:40.91243069Z"
+    created: "2023-11-23T10:10:01.145486154Z"
     description: test plugin
-    digest: ac32cc45e399bb14fb77129f371ab5383cbe268718583e0299a47eac586e00ad
+    digest: 73db552e8a2060e4bc138956972771cbbca40895ae2dad02a1971e38608a0cdb
     name: test
     type: application
     urls:
     - assets/test/test-0.1.0.tgz
     version: 0.1.0
-generated: "2023-08-07T17:06:40.910973018Z"
+generated: "2023-11-23T10:10:01.144060382Z"

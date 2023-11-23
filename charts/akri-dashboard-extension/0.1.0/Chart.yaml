@@ -7,12 +7,12 @@ annotations:
   catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.9.0-0'
   catalog.cattle.io/scope: management
   catalog.cattle.io/ui-component: plugins
-  catalog.cattle.io/display-name: KubeVirt
+  catalog.cattle.io/display-name: Akri
 apiVersion: v2
 appVersion: 0.1.0
-description: 'SUSE Edge: KubeVirt extension for Rancher Dashboard'
-name: kubevirt-dashboard-extension
+description: 'SUSE Edge: Akri extension for Rancher Dashboard'
+name: akri-dashboard-extension
 type: application
 version: 0.1.0
 icon: >-
-  https://raw.githubusercontent.com/cncf/artwork/master/projects/kubevirt/icon/color/kubevirt-icon-color.svg
+  https://raw.githubusercontent.com/cncf/artwork/master/projects/akri/icon/light/akri-icon-light.svg
