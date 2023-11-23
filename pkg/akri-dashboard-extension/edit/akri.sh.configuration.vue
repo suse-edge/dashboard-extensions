@@ -2,7 +2,7 @@
 import { _CREATE, _VIEW } from '@shell/config/query-params';
 import CruResource from '@shell/components/CruResource';
 import CreateEditView from '@shell/mixins/create-edit-view';
-// import FormValidation from '@shell/mixins/form-validation';
+import FormValidation from '@shell/mixins/form-validation';
 import NameNsDescription from '@shell/components/form/NameNsDescription';
 import Tab from '@shell/components/Tabbed/Tab';
 import Tabbed from '@shell/components/Tabbed';
@@ -32,7 +32,7 @@ export default {
     DiscoveryHandlerNameField,
   },
   //   mixins: [CreateEditView, FormValidation],
-  mixins: [CreateEditView, ResourceManager],
+  mixins: [CreateEditView, ResourceManager, FormValidation],
   props: {
     mode: {
       type: String,
@@ -58,6 +58,10 @@ export default {
       allDaemonSets: [],
       isNamespaceNew: false,
       defineCustomDiscoveryHandlerName: false,
+      fvFormRuleSets: [
+        { path: 'discoveryHandlerName', rules: ['required'] },
+        { path: 'capacity', rules: ['required'] },
+      ],
     };
   },
 
@@ -66,6 +70,12 @@ export default {
   },
 
   computed: {
+    tabErrors() {
+      return {
+        discoveryHandler: this.fvGetPathErrors(['discoveryHandlerName'])?.length > 0,
+        capacity: this.fvGetPathErrors(['capacity'])?.length > 0,
+      };
+    },
     editorMode() {
       return this.isView || this.viewCode ? EDITOR_MODES.VIEW_CODE : EDITOR_MODES.EDIT_CODE;
     },
@@ -125,7 +135,7 @@ export default {
     },
     capacity: {
       get() {
-        return this.value.spec?.capacity || 1;
+        return this.value.spec?.capacity;
       },
       set(newValue) {
         set(this.value, 'spec.capacity', parseInt(newValue));
@@ -146,9 +156,6 @@ export default {
       set(newValue) {
         set(this.value, 'spec.brokerSpec.brokerJobSpec', newValue);
       },
-    },
-    isFormValid() {
-      return !!this.value.name;
     },
     discoveryHandlerNames() {
       return [
@@ -191,8 +198,8 @@ export default {
     :can-yaml="true"
     :mode="mode"
     :resource="value"
-    :errors="errors"
-    :validation-passed="isFormValid"
+    :errors="fvUnreportedValidationErrors"
+    :validation-passed="fvFormIsValid"
     @error="(e) => (errors = e)"
     @finish="save"
     @cancel="done"
@@ -208,6 +215,7 @@ export default {
         name="discoveryHandler"
         :label="t('akri.edit.configuration.tabs.discoveryHandler.title')"
         :weight="5"
+        :error="tabErrors.discoveryHandler"
       >
         <div class="row">
           <div class="col span-6">
@@ -216,6 +224,7 @@ export default {
               :mode="mode"
               :discovery-handler-names="discoveryHandlerNames"
               :loading="isLoadingSecondaryResources"
+              :rules="fvGetAndReportPathRules('discoveryHandlerName')"
             />
           </div>
         </div>
@@ -260,6 +269,13 @@ export default {
         </div>
       </Tab>
       <Tab name="brokerPod" :label="t('akri.edit.configuration.tabs.brokerPod.title')" :weight="4">
+        <p class="mb-10">
+          {{ t('akri.edit.configuration.fields.brokerPodSpec.label') }}
+          <i
+            v-clean-tooltip="t('akri.edit.configuration.fields.brokerPodSpec.tooltip')"
+            class="icon icon-info"
+          />
+        </p>
         <YamlEditor
           ref="brokerPodEditorRef"
           v-model="brokerPodSpec"
@@ -269,6 +285,13 @@ export default {
         />
       </Tab>
       <Tab name="brokerJob" :label="t('akri.edit.configuration.tabs.brokerJob.title')" :weight="3">
+        <p class="mb-10">
+          {{ t('akri.edit.configuration.fields.brokerJobSpec.label') }}
+          <i
+            v-clean-tooltip="t('akri.edit.configuration.fields.brokerJobSpec.tooltip')"
+            class="icon icon-info"
+          />
+        </p>
         <YamlEditor
           ref="brokerJobEditorRef"
           v-model="brokerJobSpec"
@@ -317,14 +340,21 @@ export default {
           class="yaml-editor"
         />
       </Tab>
-      <Tab name="capacity" :label="t('akri.edit.configuration.tabs.capacity.title')" :weight="0">
+      <Tab
+        name="capacity"
+        :label="t('akri.edit.configuration.tabs.capacity.title')"
+        :weight="0"
+        :error="tabErrors.capacity"
+      >
         <div class="row">
           <div class="col span-6">
             <LabeledInput
               v-model="capacity"
               type="number"
               :label="t('akri.edit.configuration.fields.capacity.label')"
+              :tooltip="t('akri.edit.configuration.fields.capacity.tooltip')"
               min="1"
+              :rules="fvGetAndReportPathRules('capacity')"
             />
           </div>
         </div>

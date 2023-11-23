@@ -24,6 +24,12 @@ export default {
       type: Boolean,
       default: true,
     },
+    rules: {
+      default: () => [],
+      type: Array,
+      // we only want functions in the rules array
+      validator: (rules) => rules.every((rule) => ['function'].includes(typeof rule)),
+    },
   },
   emits: ['input'],
   data() {
@@ -80,7 +86,6 @@ export default {
     },
     cancelCustomDiscoveryHandlerName() {
       this.defineCustomDiscoveryHandlerName = false;
-      console.log('FIRST?', this.discoveryHandlerNames[0]);
       this.discoveryHandlerName = this.discoveryHandlerNames[0];
     },
   },
@@ -105,6 +110,7 @@ export default {
       :mode="mode"
       :loading="loading"
       :label="t('akri.edit.configuration.fields.discoveryHandlerName.label')"
+      :rules="rules"
     />
     <button
       v-if="discoveryHandlerNames.length"
