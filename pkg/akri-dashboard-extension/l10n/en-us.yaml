@@ -84,6 +84,13 @@ akri:
           source: Source
         capacity:
           label: Capacity
+          tooltip: Limits the number of Nodes that can utilize a device at once.
+        brokerJobSpec:
+          label: Broker job spec
+          tooltip: A broker job specification
+        brokerPodSpec:
+          label: Broker pod spec
+          tooltip: A broker pod specification
         instanceServiceSpec:
           label: Instance service spec
           tooltip: A specification of a service created for each broker pod.
