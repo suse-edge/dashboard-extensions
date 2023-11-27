@@ -15,4 +15,4 @@ name: akri-dashboard-extension
 type: application
 version: 0.1.0
 icon: >-
-  https://raw.githubusercontent.com/cncf/artwork/master/projects/akri/icon/light/akri-icon-light.svg
+  https://raw.githubusercontent.com/cncf/artwork/main/projects/akri/icon/color/akri-icon-color.svg
