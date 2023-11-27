@@ -6,7 +6,7 @@ import { POD, WORKLOAD_TYPES } from '@shell/config/types';
 export const CONFIGURATION_NAME: HeaderOptions = {
   name: 'configurationName',
   labelKey: 'akri.tableHeaders.configurationName',
-  getValue: (row: Instance) => row.spec?.configurationName || '---',
+  getValue: (row: Instance & { spec: any }) => row.spec?.configurationName || '---',
   value: 'spec.configurationName',
   sort: 'spec.configurationName',
   search: 'spec.configurationName',
