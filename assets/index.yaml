@@ -13,9 +13,9 @@ entries:
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-11-27T16:22:21.669159916Z"
+    created: "2023-11-28T10:16:22.132144383Z"
     description: 'SUSE Edge: Akri extension for Rancher Dashboard'
-    digest: 3867a8132e9dd1b7373f9a5f7d7807ff5480c37fb0e4dc36d0e940a617dc5cd1
+    digest: 2f55eb25d13b165656dc9a4102a4285a70a5c9ec780128e48d3a5d3d9cc45bdc
     icon: https://raw.githubusercontent.com/cncf/artwork/main/projects/akri/icon/color/akri-icon-color.svg
     name: akri-dashboard-extension
     type: application
@@ -35,9 +35,9 @@ entries:
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-11-27T16:22:21.669512028Z"
+    created: "2023-11-28T10:16:22.13237878Z"
     description: 'SUSE Edge: KubeVirt extension for Rancher Dashboard'
-    digest: 95b1b98dbbd33c15fdb1a10ba327d189039233c09ad5a3ab8663e1f4550b1750
+    digest: d62b29152bbf51e450115a8ce3b750b83b2ca742bab70e1a06740ee742c8963f
     icon: https://raw.githubusercontent.com/cncf/artwork/master/projects/kubevirt/icon/color/kubevirt-icon-color.svg
     name: kubevirt-dashboard-extension
     type: application
@@ -56,12 +56,12 @@ entries:
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-11-27T16:22:21.669818718Z"
+    created: "2023-11-28T10:16:22.132572681Z"
     description: test plugin
-    digest: 1da693049302b62515d1d053744b43b11526d1d52a66ec20f86c1b2d1cfeeade
+    digest: cfc9540931c97aea67ebfbf9e5b852b24b9563e20140f8f620683e98d408f294
     name: test
     type: application
     urls:
     - assets/test/test-0.1.0.tgz
     version: 0.1.0
-generated: "2023-11-27T16:22:21.668192899Z"
+generated: "2023-11-28T10:16:22.131105303Z"
