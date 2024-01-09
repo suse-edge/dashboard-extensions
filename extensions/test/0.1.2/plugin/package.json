@@ -1,0 +1,19 @@
+{
+  "name": "test",
+  "description": "test plugin",
+  "version": "0.1.2",
+  "private": false,
+  "rancher": true,
+  "engines": {
+    "node": ">=12"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "4.5.18",
+    "@vue/cli-service": "4.5.18",
+    "@vue/cli-plugin-typescript": "4.5.18"
+  },
+  "files": [
+    "**/*"
+  ],
+  "main": "test-0.1.2.umd.min.js"
+}

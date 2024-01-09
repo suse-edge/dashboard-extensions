@@ -13,9 +13,9 @@ entries:
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-11-28T10:16:22.132144383Z"
+    created: "2024-01-09T09:49:29.787609922Z"
     description: 'SUSE Edge: Akri extension for Rancher Dashboard'
-    digest: 2f55eb25d13b165656dc9a4102a4285a70a5c9ec780128e48d3a5d3d9cc45bdc
+    digest: 7c1dc94d67e2c3fce351eaebbacba5b718fc66780b85ac59f297ec2d1fdcc8ea
     icon: https://raw.githubusercontent.com/cncf/artwork/main/projects/akri/icon/color/akri-icon-color.svg
     name: akri-dashboard-extension
     type: application
@@ -35,9 +35,9 @@ entries:
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-11-28T10:16:22.13237878Z"
+    created: "2024-01-09T09:49:29.788133686Z"
     description: 'SUSE Edge: KubeVirt extension for Rancher Dashboard'
-    digest: d62b29152bbf51e450115a8ce3b750b83b2ca742bab70e1a06740ee742c8963f
+    digest: 12686e87f3d59a703a5bc27705e71d9c679234cac169fc52b09bb78d91dc038b
     icon: https://raw.githubusercontent.com/cncf/artwork/master/projects/kubevirt/icon/color/kubevirt-icon-color.svg
     name: kubevirt-dashboard-extension
     type: application
@@ -55,13 +55,32 @@ entries:
       catalog.cattle.io/scope: management
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
-    appVersion: 0.1.0
-    created: "2023-11-28T10:16:22.132572681Z"
+    appVersion: 0.1.2
+    created: "2024-01-09T09:49:29.788335594Z"
     description: test plugin
-    digest: cfc9540931c97aea67ebfbf9e5b852b24b9563e20140f8f620683e98d408f294
+    digest: ebe3cc6249cbc21205b84c9abddeebf331535c26dcf750cdf489c610f51ad588
+    name: test
+    type: application
+    urls:
+    - assets/test/test-0.1.2.tgz
+    version: 0.1.2
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.28.0-0'
+      catalog.cattle.io/namespace: cattle-ui-plugin-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux, windows
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.8.0-0'
+      catalog.cattle.io/scope: management
+      catalog.cattle.io/ui-component: plugins
+    apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-08-07T17:06:40.91243069Z"
+    description: test plugin
+    digest: ac32cc45e399bb14fb77129f371ab5383cbe268718583e0299a47eac586e00ad
     name: test
     type: application
     urls:
     - assets/test/test-0.1.0.tgz
     version: 0.1.0
-generated: "2023-11-28T10:16:22.131105303Z"
+generated: "2024-01-09T09:49:29.786910473Z"
