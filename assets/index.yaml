@@ -13,9 +13,9 @@ entries:
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-01-12T13:08:04.07404103Z"
+    created: "2024-01-12T13:17:41.044604579Z"
     description: 'SUSE Edge: Akri extension for Rancher Dashboard'
-    digest: b30b7bfcb687694179115a3651ad6a190aa409ef54d22449112b767a18746e6e
+    digest: 562100c164737cd5b560d9896cb93299b14093d16a0a22dbd7d03734d933e6cd
     icon: https://raw.githubusercontent.com/cncf/artwork/main/projects/akri/icon/color/akri-icon-color.svg
     name: akri-dashboard-extension
     type: application
@@ -35,9 +35,9 @@ entries:
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.2
-    created: "2024-01-12T13:08:04.074301787Z"
+    created: "2024-01-12T13:17:41.044820261Z"
     description: 'SUSE Edge: KubeVirt extension for Rancher Dashboard'
-    digest: aa0e3b9a1772f1cae3c76877339c08080d266948a4679bacee51f9ef28f69ff0
+    digest: 77a59f8381ee4409966b089172fd3c4c7acd7d451cd3c09b86023e62349d073c
     icon: https://raw.githubusercontent.com/cncf/artwork/master/projects/kubevirt/icon/color/kubevirt-icon-color.svg
     name: kubevirt-dashboard-extension
     type: application
@@ -68,6 +68,7 @@ entries:
   test:
   - annotations:
       catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: TEST NAME
       catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.29.0-0'
       catalog.cattle.io/namespace: cattle-ui-plugin-system
       catalog.cattle.io/os: linux
@@ -77,9 +78,9 @@ entries:
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.2
-    created: "2024-01-12T13:08:04.074488745Z"
+    created: "2024-01-12T13:17:41.045003153Z"
     description: test plugin
-    digest: 3ef62e9017b27736affec12f8beebf987ab53b5f7fd950c2ceb1f4645a2e0a10
+    digest: 254ec74069db520c6153c32b06a4796234a53ff21dd025ba29f7e0f3daf556e1
     name: test
     type: application
     urls:
@@ -104,4 +105,4 @@ entries:
     urls:
     - assets/test/test-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-12T13:08:04.073491731Z"
+generated: "2024-01-12T13:17:41.04421912Z"
