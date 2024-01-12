@@ -3,7 +3,11 @@
   "description": "test plugin",
   "version": "0.1.2",
   "private": false,
-  "rancher": true,
+  "rancher": {
+    "annotations": {
+      "catalog.cattle.io/display-name": "TEST NAME"
+    }
+  },
   "scripts": {
     "dev": "./node_modules/.bin/nuxt dev",
     "nuxt": "./node_modules/.bin/nuxt"
