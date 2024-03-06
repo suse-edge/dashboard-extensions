@@ -6,9 +6,9 @@
   "license": "Apache-2.0",
   "private": false,
   "rancher": {
-    "catalog.cattle.io/display-name": "KubeVirt",
     "annotations": {
-      "catalog.cattle.io/display-name": "KubeVirt"
+      "catalog.cattle.io/display-name": "KubeVirt",
+      "catalog.cattle.io/rancher-version": ">= v2.8.0"
     }
   },
   "scripts": {
@@ -16,7 +16,7 @@
     "nuxt": "./node_modules/.bin/nuxt"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=16"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.5.18",
