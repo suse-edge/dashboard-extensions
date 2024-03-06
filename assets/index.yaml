@@ -8,19 +8,40 @@ entries:
       catalog.cattle.io/namespace: cattle-ui-plugin-system
       catalog.cattle.io/os: linux
       catalog.cattle.io/permits-os: linux, windows
+      catalog.cattle.io/rancher-version: '>= v2.8.0'
+      catalog.cattle.io/scope: management
+      catalog.cattle.io/ui-component: plugins
+    apiVersion: v2
+    appVersion: 1.0.0-dev.1
+    created: "2024-03-06T15:59:28.154821756Z"
+    description: 'SUSE Edge: Akri extension for Rancher Dashboard'
+    digest: d07e5a7950cfebc4dd332bdaf0a682938ecf2eb853277104d125054865463b7c
+    icon: https://raw.githubusercontent.com/cncf/artwork/main/projects/akri/icon/color/akri-icon-color.svg
+    name: akri-dashboard-extension
+    type: application
+    urls:
+    - assets/akri-dashboard-extension/akri-dashboard-extension-1.0.0-dev.1.tgz
+    version: 1.0.0-dev.1
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: Akri
+      catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.29.0-0'
+      catalog.cattle.io/namespace: cattle-ui-plugin-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux, windows
       catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.9.0-0'
       catalog.cattle.io/scope: management
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2024-01-17T08:59:54.022837599Z"
+    created: "2023-11-23T10:10:35.546450878Z"
     description: 'SUSE Edge: Akri extension for Rancher Dashboard'
-    digest: 2d4b966aaee37fd4b88c16212d69df41de7bd5beb25cff1966cd34f12e19d579
-    icon: https://raw.githubusercontent.com/cncf/artwork/main/projects/akri/icon/color/akri-icon-color.svg
+    digest: b0bc92aa7efea8aa4aeb8ef2f09fb3933e5e7f0fcc92c5d3b2113c5f5a5b1a57
+    icon: https://raw.githubusercontent.com/cncf/artwork/master/projects/akri/icon/light/akri-icon-light.svg
     name: akri-dashboard-extension
     type: application
     urls:
-    - assets/akri-dashboard-extension/akri-dashboard-extension-0.1.0.tgz
+    - https://github.com/suse-edge/dashboard-extensions/releases/download/akri-dashboard-extension-0.1.0/akri-dashboard-extension-0.1.0.tgz
     version: 0.1.0
   kubevirt-dashboard-extension:
   - annotations:
@@ -35,14 +56,14 @@ entries:
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.2
-    created: "2024-01-17T08:59:54.023058652Z"
+    created: "2024-01-09T10:22:44.085503295Z"
     description: 'SUSE Edge: KubeVirt extension for Rancher Dashboard'
-    digest: a791759aa6aba3c2bdb29ca9a1ff986dfb8692ebd4f7850d10840ebaa858b63b
+    digest: b97a77b288242298bd05f3ff7ff0ef18841ff56c26a4c526231dbc72dfe90300
     icon: https://raw.githubusercontent.com/cncf/artwork/master/projects/kubevirt/icon/color/kubevirt-icon-color.svg
     name: kubevirt-dashboard-extension
     type: application
     urls:
-    - assets/kubevirt-dashboard-extension/kubevirt-dashboard-extension-0.1.2.tgz
+    - https://github.com/suse-edge/dashboard-extensions/releases/download/kubevirt-dashboard-extension-0.1.2/kubevirt-dashboard-extension-0.1.2.tgz
     version: 0.1.2
   - annotations:
       catalog.cattle.io/certified: rancher
@@ -68,7 +89,6 @@ entries:
   test:
   - annotations:
       catalog.cattle.io/certified: rancher
-      catalog.cattle.io/display-name: TEST NAME
       catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.29.0-0'
       catalog.cattle.io/namespace: cattle-ui-plugin-system
       catalog.cattle.io/os: linux
@@ -78,13 +98,13 @@ entries:
       catalog.cattle.io/ui-component: plugins
     apiVersion: v2
     appVersion: 0.1.2
-    created: "2024-01-17T08:59:54.023254317Z"
+    created: "2024-01-09T09:50:19.520193055Z"
     description: test plugin
-    digest: f3fd92fd3d1886856a6edc7a373f93ce8535c6c728e781edeb85ee8c9c722343
+    digest: 98486fd6b5fe9d58a55213c1090226f4d0f992723b338658b526aa517cbcd159
     name: test
     type: application
     urls:
-    - assets/test/test-0.1.2.tgz
+    - https://github.com/suse-edge/dashboard-extensions/releases/download/test-0.1.2/test-0.1.2.tgz
     version: 0.1.2
   - annotations:
       catalog.cattle.io/certified: rancher
@@ -105,4 +125,4 @@ entries:
     urls:
     - assets/test/test-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-17T08:59:54.022381829Z"
+generated: "2024-03-06T15:59:28.154485088Z"
