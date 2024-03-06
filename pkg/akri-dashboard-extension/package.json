@@ -2,7 +2,7 @@
   "name": "akri-dashboard-extension",
   "description": "SUSE Edge: Akri extension for Rancher Dashboard",
   "icon": "https://raw.githubusercontent.com/cncf/artwork/main/projects/akri/icon/color/akri-icon-color.svg",
-  "version": "0.1.0",
+  "version": "1.0.0-dev.1",
   "license": "Apache-2.0",
   "private": false,
   "rancher": {

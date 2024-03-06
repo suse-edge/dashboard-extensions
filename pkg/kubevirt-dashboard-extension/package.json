@@ -2,7 +2,7 @@
   "name": "kubevirt-dashboard-extension",
   "description": "SUSE Edge: KubeVirt extension for Rancher Dashboard",
   "icon": "https://raw.githubusercontent.com/cncf/artwork/master/projects/kubevirt/icon/color/kubevirt-icon-color.svg",
-  "version": "0.1.2",
+  "version": "1.0.0-dev.1",
   "license": "Apache-2.0",
   "private": false,
   "rancher": {
