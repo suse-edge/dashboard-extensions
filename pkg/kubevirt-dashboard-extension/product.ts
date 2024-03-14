@@ -15,5 +15,6 @@ export function init(plugin: IPlugin, store: any) {
     ifHaveType: KUBEVIRT_RESOURCE_NAME,
   });
 
-  basicType([KUBEVIRT_RESOURCE_NAME, VM_RESOURCE_NAME, VMI_RESOURCE_NAME]);
+  // basicType([KUBEVIRT_RESOURCE_NAME, VM_RESOURCE_NAME, VMI_RESOURCE_NAME]);
+  basicType([VM_RESOURCE_NAME, VMI_RESOURCE_NAME]);
 }
