@@ -94,7 +94,9 @@ export default class VirtualMachine extends SteveModel {
   get displayMemory() {
     return (
       this.spec.template.spec.domain.resources?.limits?.memory ||
-      this.spec.template.spec.domain.resources?.requests?.memory
+      this.spec.template.spec.domain.resources?.requests?.memory ||
+      this.spec.template.spec.domain.memory?.guest ||
+      '0Gi'
     );
   }
 
