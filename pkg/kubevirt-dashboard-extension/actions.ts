@@ -34,7 +34,7 @@ export const startVMAction: Action = {
 
 export const stopVMAction: Action = {
   label: 'Stop',
-  icon: 'icon-pause',
+  icon: 'icon-close',
   invoke: stopVMs,
   enabled: canStopVM,
   multiple: true,
