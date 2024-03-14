@@ -1,3 +1,5 @@
+product:
+  kubevirt: KubeVirt
 kubevirt:
   productLabel: 'Kubevirt Product label from i18n file'
   modal:
@@ -694,6 +696,11 @@ typeLabel:
     {count, plural,
       one { Virtual Machine }
       other { Virtual Machines }
+    }
+  kubevirt.io.virtualmachineinstance: |-
+    {count, plural,
+      one { Virtual Machine Instance }
+      other { Virtual Machine Instances }
     }
   harvesterhci.io.virtualmachineimage: |-
     {count, plural,
