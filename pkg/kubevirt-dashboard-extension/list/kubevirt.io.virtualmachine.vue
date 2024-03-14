@@ -56,6 +56,11 @@ export default {
         NAME,
         NAMESPACE,
         {
+          name: 'RunStrategy',
+          label: 'Run Strategy',
+          value: 'runStrategyLabel',
+        },
+        {
           name: 'CPU',
           label: 'CPU',
           sort: ['cpuCores'],
