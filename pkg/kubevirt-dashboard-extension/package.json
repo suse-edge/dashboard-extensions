@@ -8,7 +8,8 @@
   "rancher": {
     "annotations": {
       "catalog.cattle.io/display-name": "KubeVirt",
-      "catalog.cattle.io/rancher-version": ">= v2.8.0"
+      "catalog.cattle.io/rancher-version": ">= v2.9.0",
+      "catalog.cattle.io/ui-extensions-version": ">= 2.0.1"
     }
   },
   "scripts": {
