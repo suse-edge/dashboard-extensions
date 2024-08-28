@@ -1,10 +1,9 @@
 <script>
-import Vue from 'vue';
 import Loading from '@shell/components/Loading';
 import { VMI_RESOURCE_NAME } from '../constants';
 import NovncConsoleWrapper from './console/NovncConsoleWrapper.vue';
 
-export default Vue.extend({
+export default {
   components: { NovncConsoleWrapper, Loading },
   layout: 'blank',
 
@@ -34,7 +33,7 @@ export default Vue.extend({
       this.$refs.console.close();
     });
   },
-});
+};
 </script>
 
 <template>
