@@ -1,22 +1,3 @@
-<template>
-  <div>
-    <div v-if="connected && disconnected">
-      <main class="main-layout error">
-        <div class="text-center">
-          <BrandImage file-name="error-desert-landscape.svg" width="900" height="300" />
-          <h1>
-            {{ t('generic.notification.title.warning') }}
-          </h1>
-          <h2 class="text-secondary mt-20">
-            {{ t('vncConsole.error.message') }}
-          </h2>
-        </div>
-      </main>
-    </div>
-    <div ref="view" />
-  </div>
-</template>
-
 <script>
 import RFB from '@novnc/novnc/core/rfb';
 import BrandImage from '@shell/components/BrandImage';
@@ -69,6 +50,25 @@ export default {
   },
 };
 </script>
+
+<template>
+  <div>
+    <div v-if="connected && disconnected">
+      <main class="main-layout error">
+        <div class="text-center">
+          <BrandImage file-name="error-desert-landscape.svg" width="900" height="300" />
+          <h1>
+            {{ t('generic.notification.title.warning') }}
+          </h1>
+          <h2 class="text-secondary mt-20">
+            {{ t('vncConsole.error.message') }}
+          </h2>
+        </div>
+      </main>
+    </div>
+    <div ref="view" />
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .error {
