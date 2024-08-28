@@ -26,7 +26,7 @@ const canStartVM: Action['enabled'] = (resource: VirtualMachine) => resource.can
 
 export const startVMAction: Action = {
   label: 'Start',
-  icon: 'icon-play',
+  icon: 'icon icon-play',
   invoke: startVMs,
   enabled: canStartVM,
   multiple: true,
@@ -34,7 +34,7 @@ export const startVMAction: Action = {
 
 export const stopVMAction: Action = {
   label: 'Stop',
-  icon: 'icon-close',
+  icon: 'icon icon-close',
   invoke: stopVMs,
   enabled: canStopVM,
   multiple: true,
