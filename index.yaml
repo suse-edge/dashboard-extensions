@@ -120,6 +120,28 @@ entries:
       catalog.cattle.io/ui-component: plugins
       catalog.cattle.io/ui-extensions-version: '>= 2.0.1'
     apiVersion: v2
+    appVersion: 1.1.0
+    created: "2024-09-02T14:26:51.684480937Z"
+    description: 'SUSE Edge: KubeVirt extension for Rancher Dashboard'
+    digest: cda6490adf3efca1b1f4340b1d46ddd5a73371cde5bf8a84d64f1879d96470e8
+    icon: https://raw.githubusercontent.com/cncf/artwork/master/projects/kubevirt/icon/color/kubevirt-icon-color.svg
+    name: kubevirt-dashboard-extension
+    type: application
+    urls:
+    - assets/kubevirt-dashboard-extension/kubevirt-dashboard-extension-1.1.0.tgz
+    version: 1.1.0
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: KubeVirt
+      catalog.cattle.io/kube-version: '>= 1.16.0-0 < 1.29.0-0'
+      catalog.cattle.io/namespace: cattle-ui-plugin-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux, windows
+      catalog.cattle.io/rancher-version: '>= v2.9.0'
+      catalog.cattle.io/scope: management
+      catalog.cattle.io/ui-component: plugins
+      catalog.cattle.io/ui-extensions-version: '>= 2.0.1'
+    apiVersion: v2
     appVersion: 1.1.0-rc.1
     created: "2024-09-02T10:39:34.187261277Z"
     description: 'SUSE Edge: KubeVirt extension for Rancher Dashboard'
@@ -256,4 +278,4 @@ entries:
     urls:
     - assets/kubevirt-dashboard-extension/kubevirt-dashboard-extension-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-02T10:49:03.299818782Z"
+generated: "2024-09-02T14:26:51.683422149Z"
