@@ -74,7 +74,7 @@ export default {
     <div class="row mb-20">
       <div class="col span-6">
         <Checkbox
-          v-model="groupRecursive"
+          v-model:value="groupRecursive"
           label-key="akri.edit.configuration.fields.groupRecursive.label"
           :tooltip="t('akri.edit.configuration.fields.groupRecursive.tooltip')"
         />
@@ -90,7 +90,7 @@ export default {
           :add-label="t('akri.edit.configuration.fields.udevRules.addLabel')"
           :initial-empty-row="true"
           value-placeholder='e.g. KERNEL=="video[0-9]*"'
-          @input="udevRules = $event"
+          @update:value="udevRules = $event"
         />
       </div>
     </div>

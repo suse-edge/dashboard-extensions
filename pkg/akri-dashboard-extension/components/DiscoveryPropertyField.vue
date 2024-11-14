@@ -239,7 +239,7 @@ export default {
   <div class="var-row">
     <div class="type">
       <LabeledSelect
-        v-model="type"
+        v-model:value="type"
         :mode="mode"
         :multiple="false"
         :options="typeOpts"
@@ -247,34 +247,34 @@ export default {
         :searchable="false"
         :reduce="(e) => e.value"
         :label="t('akri.edit.configuration.fields.discoveryProperties.type')"
-        @input="updateRow"
+        @update:value="updateRow"
       />
     </div>
 
     <div class="name">
       <LabeledInput
-        v-model="name"
+        v-model:value="name"
         :label="t('akri.edit.configuration.fields.discoveryProperties.name.label')"
         :placeholder="t('akri.edit.configuration.fields.discoveryProperties.name.placeholder')"
         :mode="mode"
-        @input="updateRow"
+        @update:value="updateRow"
       />
     </div>
 
     <div v-if="type === 'simple'" class="single-value">
       <LabeledInput
-        v-model="valStr"
+        v-model:value="valStr"
         :label="t('akri.edit.configuration.fields.discoveryProperties.value.label')"
         :placeholder="t('akri.edit.configuration.fields.discoveryProperties.value.placeholder')"
         :mode="mode"
-        @input="updateRow"
+        @update:value="updateRow"
       />
     </div>
 
     <template v-else>
       <div :class="{ 'single-value': type === 'configMapRef' || type === 'secretRef' }">
         <LabeledSelect
-          v-model="referenced"
+          v-model:value="referenced"
           :options="sourceOptions"
           :multiple="false"
           :option-label="'metadata.name'"
@@ -287,14 +287,14 @@ export default {
       </div>
       <div v-if="type !== 'secretRef' && type !== 'configMapRef'">
         <LabeledSelect
-          v-model="key"
+          v-model:value="key"
           :multiple="false"
           :options="keys"
           :mode="mode"
           option-label="label"
           :label="t('akri.edit.configuration.fields.discoveryProperties.key.label')"
           :loading="loading"
-          @input="updateRow"
+          @update:value="updateRow"
         />
       </div>
     </template>

@@ -20,7 +20,7 @@ export default {
     },
     col: {
       type: Object,
-      default() {
+      default(props) {
         return {};
       },
     },
@@ -66,17 +66,17 @@ export default {
   <TableCellLoading v-if="$fetchState.pending" />
   <span v-else class="inline-flex">
     <!-- {{ brokerPodsStatus }} -->
-    <n-link v-if="to && isPod" :to="to">
+    <router-link v-if="to && isPod" :to="to">
       <BadgeState
         v-for="color in Object.keys(brokerPodsStatus)"
         :key="color"
         :color="color"
         :label="brokerPodsStatus[color].toString()"
       />
-    </n-link>
-    <n-link v-else-if="to" :to="to">
+    </router-link>
+    <router-link v-else-if="to" :to="to">
       {{ value }}
-    </n-link>
+    </router-link>
   </span>
 </template>
 

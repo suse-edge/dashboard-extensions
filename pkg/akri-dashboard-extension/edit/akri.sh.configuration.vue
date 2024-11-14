@@ -205,7 +205,7 @@ export default {
     @cancel="done"
   >
     <NameNsDescription
-      v-model="value"
+      v-model:value="value"
       :mode="mode"
       :description-hidden="true"
       @isNamespaceNew="isNamespaceNew = $event"
@@ -220,7 +220,7 @@ export default {
         <div class="row">
           <div class="col span-6">
             <DiscoveryHandlerNameField
-              v-model="discoveryHandlerName"
+              v-model:value="discoveryHandlerName"
               :mode="mode"
               :discovery-handler-names="discoveryHandlerNames"
               :loading="isLoadingSecondaryResources"
@@ -241,7 +241,7 @@ export default {
             </h3>
             <YamlEditor
               ref="discoveryHandlerEditorRef"
-              v-model="discoveryDetailsYaml"
+              v-model:value="discoveryDetailsYaml"
               :editor-mode="editorMode"
               class="yaml-editor"
             />
@@ -263,7 +263,7 @@ export default {
               :secrets="secrets"
               :value="discoveryProperties"
               :loading="isLoadingSecondaryResources"
-              @input="discoveryProperties = $event"
+              @update:value="discoveryProperties = $event"
             />
           </div>
         </div>
@@ -278,7 +278,7 @@ export default {
         </p>
         <YamlEditor
           ref="brokerPodEditorRef"
-          v-model="brokerPodSpec"
+          v-model:value="brokerPodSpec"
           :as-object="true"
           :editor-mode="editorMode"
           class="yaml-editor"
@@ -294,7 +294,7 @@ export default {
         </p>
         <YamlEditor
           ref="brokerJobEditorRef"
-          v-model="brokerJobSpec"
+          v-model:value="brokerJobSpec"
           :as-object="true"
           :editor-mode="editorMode"
           class="yaml-editor"
@@ -314,7 +314,7 @@ export default {
         </p>
         <YamlEditor
           ref="instanceServiceEditorRef"
-          v-model="instanceServiceSpec"
+          v-model:value="instanceServiceSpec"
           :as-object="true"
           :editor-mode="editorMode"
           class="yaml-editor"
@@ -334,7 +334,7 @@ export default {
         </p>
         <YamlEditor
           ref="configurationServiceEditorRef"
-          v-model="configurationServiceSpec"
+          v-model:value="configurationServiceSpec"
           :as-object="true"
           :editor-mode="editorMode"
           class="yaml-editor"
@@ -349,7 +349,7 @@ export default {
         <div class="row">
           <div class="col span-6">
             <LabeledInput
-              v-model="capacity"
+              v-model:value="capacity"
               type="number"
               :label="t('akri.edit.configuration.fields.capacity.label')"
               :tooltip="t('akri.edit.configuration.fields.capacity.tooltip')"
