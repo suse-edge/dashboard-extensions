@@ -1,5 +1,5 @@
 <script>
-import Vue from 'vue';
+import { nextTick } from 'vue';
 import { _CREATE } from '@shell/config/query-params';
 import LabeledSelect from '@shell/components/form/LabeledSelect';
 import { LabeledInput } from '@rancher/components';
@@ -79,7 +79,7 @@ export default {
       if (!e || e.value === '') {
         // The blank value in the dropdown is labeled "Define custom discovery handler name"
         this.defineCustomDiscoveryHandlerName = true;
-        Vue.nextTick(() => this.$refs.discoveryHandlerName.focus());
+        nextTick(() => this.$refs.discoveryHandlerName.focus());
       } else {
         this.defineCustomDiscoveryHandlerName = false;
       }
@@ -94,7 +94,7 @@ export default {
 <template>
   <LabeledSelect
     v-if="showDiscoveryHandlerNameSelect"
-    v-model="discoveryHandlerName"
+    v-model:value="discoveryHandlerName"
     :label="t('akri.edit.configuration.fields.discoveryHandlerName.label')"
     :options="discoveryHandlerNameOptions"
     :mode="mode"
@@ -106,7 +106,7 @@ export default {
   <div v-else>
     <LabeledInput
       ref="discoveryHandlerName"
-      v-model="discoveryHandlerName"
+      v-model:value="discoveryHandlerName"
       :mode="mode"
       :loading="loading"
       :label="t('akri.edit.configuration.fields.discoveryHandlerName.label')"

@@ -1,5 +1,5 @@
 <script>
-import RFB from '@novnc/novnc/core/rfb';
+import RFB from '@novnc/novnc/lib/rfb';
 import BrandImage from '@shell/components/BrandImage';
 
 export default {

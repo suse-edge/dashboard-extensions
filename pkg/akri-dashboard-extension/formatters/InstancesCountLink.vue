@@ -20,7 +20,7 @@ export default {
     },
     col: {
       type: Object,
-      default() {
+      default(props) {
         return {};
       },
     },
@@ -45,8 +45,8 @@ export default {
 <template>
   <TableCellLoading v-if="$fetchState.pending" />
   <span v-else>
-    <n-link v-if="to" :to="to">
+    <router-link v-if="to" :to="to">
       {{ value }}
-    </n-link>
+    </router-link>
   </span>
 </template>

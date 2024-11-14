@@ -83,13 +83,13 @@ export default {
   <div>
     <div v-for="(row, i) in properties" :key="row.id">
       <DiscoveryPropertyField
-        v-model="row.value"
+        v-model:value="row.value"
         :secrets="secrets"
         :config-maps="configMaps"
         :mode="mode"
         :loading="loading"
         @remove="removeRow(i)"
-        @input="updateRow"
+        @update:value="updateRow"
       />
     </div>
     <button

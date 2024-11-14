@@ -39,7 +39,7 @@ export default {
 <template>
   <div>
     <Loading v-if="$fetchState.pending" />
-    <SerialConsole v-else ref="serialConsole" v-model="vmi" />
+    <SerialConsole v-else ref="serialConsole" v-model:value="vmi" />
   </div>
 </template>
 

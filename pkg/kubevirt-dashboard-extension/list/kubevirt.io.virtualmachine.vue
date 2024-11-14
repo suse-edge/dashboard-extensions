@@ -120,7 +120,7 @@ export default {
 
   //     await this.$store.dispatch('harvester/findAll', { type: HCI.VMIM });
 
-  //     this.$set(this, 'allVMIs', vmis);
+  //     this['allVMIs'] = vmis;
   //   },
 };
 </script>
@@ -136,19 +136,18 @@ export default {
       :schema="schema"
       :groupable="true"
       key-field="_key"
-      v-on="$listeners"
     >
-      <template slot="cell:state" slot-scope="scope">
+      <template #cell:state="scope">
         <div class="state">
           <VMState class="vmstate" :row="scope.row" />
         </div>
       </template>
 
-      <template slot="cell:name" slot-scope="scope">
+      <template #cell:name="scope">
         <div class="name-console">
           <LinkDetail
             v-if="scope.row.type !== 'kubevirt.io.virtualmachineinstance'"
-            v-model="scope.row.metadata.name"
+            v-model:value="scope.row.metadata.name"
             :row="scope.row"
           />
           <span v-else>

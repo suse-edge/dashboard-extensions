@@ -1,5 +1,5 @@
 <script>
-import KeyTable from '@novnc/novnc/core/input/keysym';
+import KeyTable from '@novnc/novnc/lib/input/keysym';
 import { VM_RESOURCE_NAME } from '../../constants';
 import NovncConsole from './NovncConsole';
 
@@ -204,7 +204,7 @@ export default {
   <div id="app">
     <div class="vm-console">
       <div class="combination-keys">
-        <v-popover
+        <VDropdown
           ref="popover"
           placement="top"
           trigger="click"
@@ -215,7 +215,7 @@ export default {
             {{ t('kubevirt.virtualMachine.detail.console.shortKeys') }}
           </button>
 
-          <template slot="popover">
+          <template #popover>
             <novnc-console-item
               :items="keymap"
               :path="keysRecord"
@@ -224,7 +224,7 @@ export default {
               @sendKeys="sendKeys"
             />
           </template>
-        </v-popover>
+        </VDropdown>
 
         <button v-if="hasSoftRebootAction" class="btn btn-sm bg-primary" @click="softReboot">
           {{ t('kubevirt.action.softreboot') }}

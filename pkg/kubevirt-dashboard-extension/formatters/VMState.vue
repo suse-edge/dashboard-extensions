@@ -101,17 +101,17 @@ export default {
     <!-- <HarvesterMigrationState v-show="isMigrating" :vm-resource="row" @state-changed="migrationStateChanged" /> -->
     <div v-show="!isMigrating" class="state">
       <BadgeStateFormatter :row="row" />
-      <v-popover v-if="warningMessage.length" trigger="hover" offset="16">
+      <VDropdown v-if="warningMessage.length" trigger="hover" offset="16">
         <span class="tooltip-target">
           <i class="icon icon-warning icon-lg text-warning" />
         </span>
 
-        <template slot="popover">
+        <template #popover>
           <p v-for="(message, index) in warningMessage" :key="message">
             {{ index + 1 }}. {{ message }}
           </p>
         </template>
-      </v-popover>
+      </VDropdown>
     </div>
   </span>
 </template>
