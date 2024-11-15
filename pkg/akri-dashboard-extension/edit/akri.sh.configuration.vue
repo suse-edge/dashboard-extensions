@@ -49,6 +49,7 @@ export default {
       required: true,
     },
   },
+  emits: ['input'],
 
   data() {
     return {
@@ -77,7 +78,7 @@ export default {
       };
     },
     editorMode() {
-      return this.isView || this.viewCode ? EDITOR_MODES.VIEW_CODE : EDITOR_MODES.EDIT_CODE;
+      return this.isView ? EDITOR_MODES.VIEW_CODE : EDITOR_MODES.EDIT_CODE;
     },
 
     isView() {
@@ -205,10 +206,11 @@ export default {
     @cancel="done"
   >
     <NameNsDescription
-      v-model:value="value"
+      :value="value"
       :mode="mode"
       :description-hidden="true"
       @isNamespaceNew="isNamespaceNew = $event"
+      @input="$emit('input', $event)"
     />
     <Tabbed :side-tabs="true" @changed="onTabChanged">
       <Tab
@@ -258,12 +260,11 @@ export default {
               />
             </h3>
             <DiscoveryProperties
+              v-model:value="discoveryProperties"
               :mode="mode"
               :config-maps="configMaps"
               :secrets="secrets"
-              :value="discoveryProperties"
               :loading="isLoadingSecondaryResources"
-              @update:value="discoveryProperties = $event"
             />
           </div>
         </div>
