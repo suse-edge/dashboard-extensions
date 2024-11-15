@@ -4,7 +4,7 @@ import { CONFIG_MAP, SECRET, NAMESPACE } from '@shell/config/types';
 import { mapGetters } from 'vuex';
 import { _VIEW } from '@shell/config/query-params';
 import LabeledSelect from '@shell/components/form/LabeledSelect';
-import { LabeledInput } from '@components/Form/LabeledInput';
+import { LabeledInput } from '@rancher/components';
 
 const getPropertyType = (property) => {
   if (property.value) {
@@ -59,7 +59,7 @@ export default {
       },
     },
   },
-  emits: ['input', 'remove'],
+  emits: ['update:value', 'remove'],
   data() {
     const type = getPropertyType(this.value);
     const keys = [];
@@ -195,7 +195,7 @@ export default {
   methods: {
     updateRow() {
       if (!this.name?.length) {
-        this.$emit('input', null);
+        this.$emit('update:value', null);
         return;
       }
       const out = { name: this.name };
@@ -229,7 +229,7 @@ export default {
         default:
           out.value = this.valStr;
       }
-      this.$emit('input', out);
+      this.$emit('update:value', out);
     },
     get,
   },

@@ -34,7 +34,7 @@ export default {
       },
     },
   },
-  emits: ['input'],
+  emits: ['update:value'],
   data() {
     const properties = (this.value || []).map(({ name, value, valueFrom }) => {
       return {
@@ -59,7 +59,7 @@ export default {
   methods: {
     update() {
       this.$emit(
-        'input',
+        'update:value',
         this.properties.map((p) => p.value)
       );
     },

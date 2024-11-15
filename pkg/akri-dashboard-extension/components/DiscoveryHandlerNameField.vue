@@ -31,7 +31,7 @@ export default {
       validator: (rules) => rules.every((rule) => ['function'].includes(typeof rule)),
     },
   },
-  emits: ['input'],
+  emits: ['update:value'],
   data() {
     return {
       defineCustomDiscoveryHandlerName: true,
@@ -57,8 +57,8 @@ export default {
     },
   },
   watch: {
-    discoveryHandlerName(neu) {
-      this.$emit('input', neu);
+    discoveryHandlerName(newValue) {
+      this.$emit('update:value', newValue);
     },
     loading(neu) {
       if (!neu) {
