@@ -69,11 +69,11 @@ const IgnoreMessages = ['pod has unbound immediate PersistentVolumeClaims'];
 
 export default class VirtualMachine extends SteveModel {
   get canStart() {
-    return !this.spec.runStrategy && !this.spec.running;
+    return this.spec.runStrategy === 'Halted' || this.spec.running === false;
   }
 
   get canStop() {
-    return !this.spec.runStrategy && this.spec.running;
+    return this.spec.runStrategy !== 'Halted' || this.spec.running === true;
   }
 
   get runStrategyLabel() {
