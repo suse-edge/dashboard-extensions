@@ -9,17 +9,19 @@ type VirtualMachine = VirtualMachineModel & {
 
 const startVMs: Action['invoke'] = function (opts, resources: VirtualMachine[]) {
   resources.map((resource) => {
-    delete resource.spec.running;
-    resource.spec.runStrategy = 'Always';
-    resource.save();
+    // delete resource.spec.running;
+    // resource.spec.runStrategy = 'Always';
+    // resource.save();
+    resource.startVM();
   });
 };
 
 const stopVMs: Action['invoke'] = function (opts, resources: VirtualMachine[]) {
   resources.map((resource) => {
-    delete resource.spec.running;
-    resource.spec.runStrategy = 'Halted';
-    resource.save();
+    // delete resource.spec.running;
+    // resource.spec.runStrategy = 'Halted';
+    // resource.save();
+    resource.stopVM();
   });
 };
 

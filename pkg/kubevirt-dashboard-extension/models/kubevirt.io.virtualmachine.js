@@ -68,12 +68,73 @@ const VMIPhase = {
 const IgnoreMessages = ['pod has unbound immediate PersistentVolumeClaims'];
 
 export default class VirtualMachine extends SteveModel {
+  get availableActions() {
+    const out = super._availableActions;
+
+    const clone = out.find((action) => action.action === 'goToClone');
+
+    if (clone) {
+      clone.action = 'goToCloneVM';
+    }
+
+    return [
+      {
+        action: 'stopVM',
+        enabled: !!this.canStop,
+        icon: 'icon icon-close',
+        label: this.t('kubevirt.action.stop'),
+        bulkable: true,
+      },
+      {
+        action: 'startVM',
+        enabled: !!this.canStart,
+        icon: 'icon icon-play',
+        label: this.t('kubevirt.action.start'),
+        bulkable: true,
+      },
+      ...out,
+    ];
+  }
+  async doVMSubresourceActionGrowl(actionName, opt = {}) {
+    console.log('this.actions', this.actions);
+    const clusterId = this.$rootGetters['clusterId'];
+    const url = `/k8s/clusters/${clusterId}/apis/subresources.kubevirt.io/v1/namespaces/${this.metadata.namespace}/virtualmachines/${this.metadata.name}/${actionName}`;
+    console.log('url', url);
+    try {
+      return await this.$dispatch(`request`, {
+        headers: { accept: '*/*' },
+        method: 'PUT',
+        url,
+        ...opt,
+      });
+    } catch (err) {
+      this.$dispatch(
+        'growl/fromError',
+        {
+          title: this.$rootGetters['i18n/t']('generic.notification.title.error'),
+          err: err.data || err,
+        },
+        { root: true }
+      );
+    }
+  }
+
+  startVM() {
+    this.doVMSubresourceActionGrowl('start');
+  }
+
+  stopVM() {
+    this.doVMSubresourceActionGrowl('stop');
+  }
+
   get canStart() {
-    return this.spec.runStrategy === 'Halted' || this.spec.running === false;
+    // NOTE: based on Harvester backend formatter: https://github.com/harvester/harvester/blob/master/pkg/api/vm/formatter.go#L192
+    // and harvester-ui-extension https://github.com/harvester/harvester-ui-extension/blob/main/pkg/harvester/models/kubevirt.io.virtualmachine.js
+    return !(this.isStarting || this.isRunning);
   }
 
   get canStop() {
-    return this.spec.runStrategy !== 'Halted' || this.spec.running === true;
+    return !(this.isBeingStopped || !this.isRunning);
   }
 
   get runStrategyLabel() {
