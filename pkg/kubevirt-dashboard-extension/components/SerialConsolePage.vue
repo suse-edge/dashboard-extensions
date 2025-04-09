@@ -5,7 +5,6 @@ import SerialConsole from './console/SerialConsole';
 
 export default {
   components: { SerialConsole, Loading },
-  layout: 'blank',
 
   data() {
     return { id: `${this.$route.params.namespace}/${this.$route.params.vm}` };
