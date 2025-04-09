@@ -9,7 +9,7 @@ export default {
   components: { ButtonDropdown },
 
   props: {
-    resource: {
+    resourceType: {
       type: Object,
       required: true,
       default: () => {
@@ -22,7 +22,7 @@ export default {
     ...mapGetters({ t: 'i18n/t' }),
 
     isOff() {
-      return this.resource.stateDisplay === OFF;
+      return this.resourceType.stateDisplay === OFF;
     },
 
     options() {
@@ -45,7 +45,7 @@ export default {
     },
 
     show(type) {
-      const id = this.resource.id;
+      const id = this.resourceType.id;
       const host = window.location.host;
       const prefix = window.location.pathname.replace(this.$route.path, '');
       const params = this.$route?.params;

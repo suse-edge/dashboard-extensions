@@ -155,7 +155,7 @@ export default {
             {{ scope.row.metadata.name }}
           </span>
 
-          <ConsoleBar :resource="scope.row" class="console mr-10" />
+          <ConsoleBar :resource-type="scope.row" class="console mr-10" />
         </div>
       </template>
     </ResourceTable>
