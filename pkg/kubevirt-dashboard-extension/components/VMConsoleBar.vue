@@ -1,7 +1,7 @@
 <script>
 import ButtonDropdown from '@shell/components/ButtonDropdown';
 import { mapGetters } from 'vuex';
-import { OFF } from '../models/kubevirt.io.virtualmachine';
+import { OFF } from '../models/harvester/kubevirt.io.virtualmachine';
 
 export default {
   name: 'VMConsoleBar',
@@ -51,7 +51,13 @@ export default {
       const params = this.$route?.params;
       const url = `https://${host}${prefix}/${params.product}/c/${params.cluster}/console/${id}/${type}`;
 
-      window.open(url, '_blank', 'toolbars=0,width=900,height=700,left=0,top=0,noreferrer');
+      window.open(
+        url,
+        '_blank',
+        `toolbars=0,width=${screen.width - 200},height=${
+          screen.height - 200
+        },left=0,top=0,noreferrer`
+      );
     },
 
     isEmpty(o) {
@@ -62,7 +68,7 @@ export default {
 </script>
 
 <template>
-  <div class="vm-console-dropdown">
+  <div class="overview-web-console">
     <ButtonDropdown
       :disabled="isOff"
       :no-drop="isOff"
@@ -75,7 +81,7 @@ export default {
 </template>
 
 <style lang="scss">
-.vm-console-dropdown {
+.overview-web-console {
   .btn {
     line-height: 24px;
     min-height: 24px;
