@@ -5,7 +5,6 @@ import NovncConsoleWrapper from './console/NovncConsoleWrapper.vue';
 
 export default {
   components: { NovncConsoleWrapper, Loading },
-  layout: 'blank',
 
   data() {
     return { id: `${this.$route.params.namespace}/${this.$route.params.vm}` };
