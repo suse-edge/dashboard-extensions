@@ -17,6 +17,7 @@ export default {
       required: true,
     },
   },
+  emits: ['close'],
 
   data() {
     return {
@@ -58,7 +59,8 @@ export default {
         });
 
         this.queue = [];
-      }, 5),
+      }, 10),
+      deep: true,
     },
   },
 
@@ -160,7 +162,7 @@ export default {
 
       this.socket = new Socket(url);
 
-      this.socket.addEventListener(EVENT_CONNECTING, () => {
+      this.socket.addEventListener(EVENT_CONNECTING, (e) => {
         this.isOpen = false;
         this.isOpening = true;
       });
@@ -171,7 +173,7 @@ export default {
         console.error('Connect Error', e); // eslint-disable-line no-console
       });
 
-      this.socket.addEventListener(EVENT_CONNECTED, () => {
+      this.socket.addEventListener(EVENT_CONNECTED, (e) => {
         this.isOpen = true;
         this.isOpening = false;
         if (this.show) {
@@ -185,7 +187,7 @@ export default {
         }
       });
 
-      this.socket.addEventListener(EVENT_DISCONNECTED, () => {
+      this.socket.addEventListener(EVENT_DISCONNECTED, (e) => {
         this.isOpen = false;
         this.isOpening = false;
         this.$emit('close');
@@ -209,7 +211,7 @@ export default {
       }
     },
 
-    fit() {
+    fit(arg) {
       if (!this.fitAddon) {
         return;
       }
