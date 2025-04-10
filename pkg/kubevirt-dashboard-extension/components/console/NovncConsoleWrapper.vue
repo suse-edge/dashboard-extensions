@@ -2,6 +2,7 @@
 import KeyTable from '@novnc/novnc/lib/input/keysym';
 import { VM_RESOURCE_NAME } from '../../constants';
 import NovncConsole from './NovncConsole';
+import NovncConsoleItem from './NovncConsoleItem';
 
 const SHORT_KEYS = {
   ControlLeft: {
@@ -96,7 +97,7 @@ const F_KEYS = {
 };
 
 export default {
-  components: { NovncConsole },
+  components: { NovncConsole, NovncConsoleItem },
 
   props: {
     value: {
@@ -118,7 +119,7 @@ export default {
   async fetch() {
     this.vmResource = await this.$store.dispatch('cluster/find', {
       type: VM_RESOURCE_NAME,
-      id: this.id,
+      id: this.value.id,
     });
   },
 
@@ -162,7 +163,7 @@ export default {
     },
 
     hasSoftRebootAction() {
-      return !!this.vmResource?.actions?.softreboot;
+      return this.vmResource?.canSoftReboot;
     },
   },
 
@@ -215,7 +216,7 @@ export default {
             {{ t('kubevirt.virtualMachine.detail.console.shortKeys') }}
           </button>
 
-          <template #popover>
+          <template #popper>
             <novnc-console-item
               :items="keymap"
               :path="keysRecord"

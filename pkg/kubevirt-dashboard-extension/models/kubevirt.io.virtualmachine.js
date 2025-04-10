@@ -26,12 +26,19 @@ export default class VirtualMachine extends VirtVm {
         label: this.t('kubevirt.action.start'),
         bulkable: true,
       },
+      {
+        action: 'softrebootVM',
+        enabled: !!this.canSoftReboot,
+        icon: 'icon icon-pipeline',
+        label: this.t('kubevirt.action.softreboot'),
+        bulkable: true,
+      },
       ...out,
     ];
   }
-  async doVMSubresourceActionGrowl(actionName, opt = {}) {
+  async doVMSubresourceActionGrowl(subresource, actionName, opt = {}) {
     const clusterId = this.$rootGetters['clusterId'];
-    const url = `/k8s/clusters/${clusterId}/apis/subresources.kubevirt.io/v1/namespaces/${this.metadata.namespace}/virtualmachines/${this.metadata.name}/${actionName}`;
+    const url = `/k8s/clusters/${clusterId}/apis/subresources.kubevirt.io/v1/namespaces/${this.metadata.namespace}/${subresource}/${this.metadata.name}/${actionName}`;
     try {
       return await this.$dispatch(`request`, {
         headers: { accept: '*/*' },
@@ -52,11 +59,15 @@ export default class VirtualMachine extends VirtVm {
   }
 
   startVM() {
-    this.doVMSubresourceActionGrowl('start');
+    this.doVMSubresourceActionGrowl('virtualmachines', 'start');
   }
 
   stopVM() {
-    this.doVMSubresourceActionGrowl('stop');
+    this.doVMSubresourceActionGrowl('virtualmachines', 'stop');
+  }
+
+  softrebootVM() {
+    this.doVMSubresourceActionGrowl('virtualmachineinstances', 'softreboot');
   }
 
   get canStart() {
@@ -67,6 +78,14 @@ export default class VirtualMachine extends VirtVm {
 
   get canStop() {
     return !(this.isBeingStopped || !this.isRunning);
+  }
+
+  get canSoftReboot() {
+    return this.canPause;
+  }
+
+  get canPause() {
+    return !(this.isPaused || !this.isRunning);
   }
 
   get vCPUs() {
