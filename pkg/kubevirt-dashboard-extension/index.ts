@@ -13,20 +13,4 @@ export default function (plugin: IPlugin) {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   plugin.addProduct(require('./product'));
   plugin.addRoutes(routes);
-  // plugin.addRoute({
-  //   name: `${PRODUCT_NAME}-c-cluster-vm-serialconsole`,
-  //   path: `/:product/c/:cluster/console/:namespace/:vm/serial`,
-  //   component: SerialConsolePage,
-  //   meta: {
-  //     product: PRODUCT_NAME,
-  //   },
-  // });
-  // plugin.addRoute({
-  //   name: `${PRODUCT_NAME}-c-cluster-vm-vncconsole`,
-  //   path: `/:product/c/:cluster/console/:namespace/:vm/vnc`,
-  //   component: VNCConsolePage,
-  //   meta: {
-  //     product: PRODUCT_NAME,
-  //   },
-  // });
 }
