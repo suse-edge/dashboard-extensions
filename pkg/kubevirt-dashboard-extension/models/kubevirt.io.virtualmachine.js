@@ -33,6 +33,20 @@ export default class VirtualMachine extends VirtVm {
         label: this.t('kubevirt.action.softreboot'),
         bulkable: true,
       },
+      {
+        action: 'pauseVM',
+        enabled: !!this.canPause,
+        icon: 'icon icon-pause',
+        label: this.t('kubevirt.action.pause'),
+        bulkable: true,
+      },
+      {
+        action: 'unpauseVM',
+        enabled: !!this.canUnpause,
+        icon: 'icon icon-spinner',
+        label: this.t('kubevirt.action.unpause'),
+        bulkable: true,
+      },
       ...out,
     ];
   }
@@ -70,14 +84,22 @@ export default class VirtualMachine extends VirtVm {
     this.doVMSubresourceActionGrowl('virtualmachineinstances', 'softreboot');
   }
 
+  pauseVM() {
+    this.doVMSubresourceActionGrowl('virtualmachineinstances', 'pause');
+  }
+
+  unpauseVM() {
+    this.doVMSubresourceActionGrowl('virtualmachineinstances', 'unpause');
+  }
+
   get canStart() {
     // NOTE: based on Harvester backend formatter: https://github.com/harvester/harvester/blob/master/pkg/api/vm/formatter.go#L192
     // and harvester-ui-extension https://github.com/harvester/harvester-ui-extension/blob/main/pkg/harvester/models/kubevirt.io.virtualmachine.js
-    return !(this.isStarting || this.isRunning);
+    return !this.isStarting && !this.isRunning;
   }
 
   get canStop() {
-    return !(this.isBeingStopped || !this.isRunning);
+    return !this.isBeingStopped && this.isRunning;
   }
 
   get canSoftReboot() {
@@ -85,7 +107,11 @@ export default class VirtualMachine extends VirtVm {
   }
 
   get canPause() {
-    return !(this.isPaused || !this.isRunning);
+    return !this.isPaused && this.isRunning;
+  }
+
+  get canUnpause() {
+    return !this.isRunning && this.isPaused;
   }
 
   get vCPUs() {
