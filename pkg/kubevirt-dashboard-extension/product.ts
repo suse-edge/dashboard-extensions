@@ -19,7 +19,7 @@ export function init(plugin: IPlugin, store: any) {
 
   // basicType([KUBEVIRT_RESOURCE_NAME, VM_RESOURCE_NAME, VMI_RESOURCE_NAME]);
   configureType(VM_RESOURCE_NAME, {
-    displayName: 'Virtual machines yo!',
+    displayName: 'Virtual machines',
     isCreatable: true,
     isEditable: true,
     isRemovable: true,
