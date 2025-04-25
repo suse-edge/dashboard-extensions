@@ -1,5 +1,5 @@
-import { HCI } from './harvester/types';
-import VirtVm from './harvester/kubevirt.io.virtualmachine';
+import { HCI } from '../harvester/types';
+import VirtVm from '../harvester/models/kubevirt.io.virtualmachine';
 import { calculateVCPU } from './utils';
 export default class VirtualMachine extends VirtVm {
   get availableActions() {
