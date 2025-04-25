@@ -1,6 +1,6 @@
 import SteveModel from '@shell/plugins/steve/steve-class';
 import { VIEW_IN_API, DEV } from '@shell/store/prefs';
-import { PRODUCT_NAME as HARVESTER_PRODUCT } from './config/harvester';
+import { PRODUCT_NAME as HARVESTER_PRODUCT } from '../config/harvester';
 
 export default class HarvesterResource extends SteveModel {
   get listLocation() {

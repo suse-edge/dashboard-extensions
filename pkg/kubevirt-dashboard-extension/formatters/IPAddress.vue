@@ -5,7 +5,7 @@ import { isIpv4 } from '@shell/utils/string';
 // import { HCI as HCI_ANNOTATIONS } from '@pkg/harvester/config/labels-annotations';
 // import { HCI } from '../types';
 import { VMI_RESOURCE_NAME } from '../constants';
-import { OFF } from '../models/harvester/kubevirt.io.virtualmachine';
+import { OFF } from '../harvester/models/kubevirt.io.virtualmachine';
 
 const MANAGEMENT_NETWORK = 'Management Network';
 

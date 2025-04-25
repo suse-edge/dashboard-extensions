@@ -1,18 +1,18 @@
 
 import { load } from 'js-yaml';
 import { omitBy, pickBy } from 'lodash';
-import { PRODUCT_NAME as HARVESTER_PRODUCT } from './config/harvester';
+import { PRODUCT_NAME as HARVESTER_PRODUCT } from '../config/harvester';
 import { colorForState } from '@shell/plugins/dashboard-store/resource-class';
 import { POD, NODE, PVC } from '@shell/config/types';
 import { findBy } from '@shell/utils/array';
 import { parseSi } from '@shell/utils/units';
 import { get, set } from '@shell/utils/object';
-import { LABELS_TO_IGNORE_REGEX, HCI as HCI_ANNOTATIONS } from './config/labels-annotations';
+import { LABELS_TO_IGNORE_REGEX, HCI as HCI_ANNOTATIONS } from '../config/labels-annotations';
 import { _CLONE } from '@shell/config/query-params';
 import { matchesSomeRegex } from '@shell/utils/string';
-import { parseVolumeClaimTemplates } from './utils/vm';
-import { BACKUP_TYPE } from './config/types';
-import { HCI } from './types';
+import { parseVolumeClaimTemplates } from '../utils/vm';
+import { BACKUP_TYPE } from '../config/types';
+import { HCI } from '../types';
 import HarvesterResource from './harvester';
 
 export const OFF = 'Off';
