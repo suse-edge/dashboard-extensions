@@ -8,6 +8,28 @@ entries:
       catalog.cattle.io/namespace: cattle-ui-plugin-system
       catalog.cattle.io/os: linux
       catalog.cattle.io/permits-os: linux, windows
+      catalog.cattle.io/rancher-version: '>= 2.11.0-0'
+      catalog.cattle.io/scope: management
+      catalog.cattle.io/ui-component: plugins
+      catalog.cattle.io/ui-extensions-version: '>= 3.0.4 < 4.0.0'
+    apiVersion: v2
+    appVersion: 303.0.1+up1.3.0
+    created: "2025-04-28T08:37:55.648312453Z"
+    description: 'SUSE Edge: Akri extension for Rancher Dashboard'
+    digest: ab3e0b979f46b485e58d8cc6a24d40f5d3bd26980fa1fb17270eb9eeef755058
+    icon: https://raw.githubusercontent.com/cncf/artwork/main/projects/akri/icon/color/akri-icon-color.svg
+    name: akri-dashboard-extension
+    type: application
+    urls:
+    - assets/akri-dashboard-extension/akri-dashboard-extension-303.0.1+up1.3.0.tgz
+    version: 303.0.1+up1.3.0
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: Akri
+      catalog.cattle.io/kube-version: '>= v1.26.0-0'
+      catalog.cattle.io/namespace: cattle-ui-plugin-system
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux, windows
       catalog.cattle.io/rancher-version: '>= 2.10.0-0'
       catalog.cattle.io/scope: management
       catalog.cattle.io/ui-component: plugins
@@ -476,4 +498,4 @@ entries:
     urls:
     - assets/kubevirt-dashboard-extension/kubevirt-dashboard-extension-0.1.0.tgz
     version: 0.1.0
-generated: "2025-04-28T07:58:32.875948029Z"
+generated: "2025-04-28T08:37:55.64728768Z"
