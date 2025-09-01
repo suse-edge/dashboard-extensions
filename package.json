@@ -1,6 +1,6 @@
 {
   "name": "suse-edge-dashboard-extensions",
-  "version": "303.0.2+up1.3.1",
+  "version": "304.0.3+up1.3.1",
   "license": "Apache-2.0",
   "private": false,
   "engines": {
