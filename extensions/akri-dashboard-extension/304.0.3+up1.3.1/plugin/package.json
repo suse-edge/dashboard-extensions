@@ -1,0 +1,25 @@
+{
+  "name": "akri-dashboard-extension",
+  "description": "SUSE Edge: Akri extension for Rancher Dashboard",
+  "icon": "https://raw.githubusercontent.com/cncf/artwork/main/projects/akri/icon/color/akri-icon-color.svg",
+  "version": "304.0.3+up1.3.1",
+  "license": "Apache-2.0",
+  "private": false,
+  "rancher": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "@vue/cli-plugin-typescript": "~5.0.0",
+    "cache-loader": "^4.1.0",
+    "color": "4.2.3",
+    "ip": "2.0.1",
+    "node-polyfill-webpack-plugin": "^3.0.0"
+  },
+  "files": [
+    "**/*"
+  ],
+  "main": "akri-dashboard-extension-304.0.3+up1.3.1.umd.min.js"
+}
