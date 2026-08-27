@@ -2,12 +2,6 @@ name: Build and Release Extension Charts
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
-  # pull_request:
-  #   branches:
-  #     - main
   release:
     types: [released]
 
@@ -20,10 +14,8 @@ jobs:
   build-extension-charts:
     uses: rancher/dashboard/.github/workflows/build-extension-charts.yml@f65aa2fa9cef1b1fcb64a096fb807eefca5a4800 # v2.15.0
     permissions:
-      actions: write
       contents: write
-      deployments: write
-      pages: write
+      pull-requests: write
     with:
       target_branch: gh-pages
       tagged_release: ${{ github.ref_name }}
