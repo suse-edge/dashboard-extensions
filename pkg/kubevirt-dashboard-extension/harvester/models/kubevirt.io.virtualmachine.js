@@ -14,6 +14,7 @@ import { parseVolumeClaimTemplates } from '../utils/vm';
 import { BACKUP_TYPE } from '../config/types';
 import { HCI } from '../types';
 import HarvesterResource from './harvester';
+import { getVmCPUMemoryValues } from '../utils/cpuMemory';
 
 export const OFF = 'Off';
 
@@ -717,6 +718,7 @@ export default class VirtVm extends HarvesterResource {
     if (this &&
       !this.isVMExpectedRunning &&
       this.isVMCreated &&
+      this.vmi?.status?.phase !== undefined &&
       this.vmi?.status?.phase !== VMIPhase.Succeeded &&
       this.vmi?.status?.phase !== VMIPhase.Pending
     ) {
@@ -877,7 +879,7 @@ export default class VirtVm extends HarvesterResource {
       this.isRunning?.status ||
       this.isNotReady?.status ||
       this.isStarting?.status ||
-      this.isWaitingForVMI?.state ||
+      this.isWaitingForVMI?.status ||
       this.otherState?.status;
 
     return state;
@@ -1081,19 +1083,6 @@ export default class VirtVm extends HarvesterResource {
         translationKey: 'harvester.fields.name'
       },
       {
-        nullable:       false,
-        path:           'spec.template.spec.domain.cpu.cores',
-        min:            1,
-        required:       true,
-        translationKey: 'harvester.fields.cpu'
-      },
-      {
-        nullable:       false,
-        path:           'spec.template.spec.domain.resources.limits.memory',
-        required:       true,
-        translationKey: 'harvester.fields.memory'
-      },
-      {
         nullable:   false,
         path:       'spec.template.spec',
         validators: ['vmNetworks']
@@ -1116,12 +1105,11 @@ export default class VirtVm extends HarvesterResource {
   }
 
   get memorySort() {
-    const memory =
-      this?.spec?.template?.spec?.domain?.resources?.requests?.memory || 0;
+    const memory = getVmCPUMemoryValues(this).memory;
 
     const formatSize = parseSi(memory);
 
-    return parseInt(formatSize);
+    return parseInt(formatSize, 10);
   }
 
   get ingoreVMMessage() {
@@ -1150,11 +1138,12 @@ export default class VirtVm extends HarvesterResource {
     return this.ingoreVMMessage ? '' : super.stateDescription;
   }
 
+  get displayCPU() {
+    return getVmCPUMemoryValues(this).cpu;
+  }
+
   get displayMemory() {
-    return (
-      this.spec.template.spec.domain.resources?.limits?.memory ||
-      this.spec.template.spec.domain.resources?.requests?.memory
-    );
+    return getVmCPUMemoryValues(this).memory;
   }
 
   get isQemuInstalled() {

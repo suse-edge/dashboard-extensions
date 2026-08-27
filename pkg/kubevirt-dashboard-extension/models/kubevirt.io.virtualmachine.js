@@ -95,11 +95,13 @@ export default class VirtualMachine extends VirtVm {
   get canStart() {
     // NOTE: based on Harvester backend formatter: https://github.com/harvester/harvester/blob/master/pkg/api/vm/formatter.go#L192
     // and harvester-ui-extension https://github.com/harvester/harvester-ui-extension/blob/main/pkg/harvester/models/kubevirt.io.virtualmachine.js
-    return !this.isStarting && !this.isRunning;
+    return !this.isStarting && !this.isRunning && !this.isPaused && !this.isTerminating;
   }
 
   get canStop() {
-    return !this.isBeingStopped && this.isRunning;
+    // KubeVirt >= 1.8 rejects stop requests for paused VMIs, they have to be unpaused first:
+    // https://github.com/kubevirt/kubevirt/pull/15405
+    return !!this.isRunning && !this.isPaused;
   }
 
   get canSoftReboot() {

@@ -92,6 +92,46 @@ export default {
         this.isMigrating = !!neu;
       }
     },
+    showMessage(show) {
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+
+      if (this.$refs.popover) {
+        if (show) {
+          this.$refs.popover.show();
+        } else {
+          this.$refs.popover.hide();
+        }
+      }
+    },
+
+    delayClose() {
+      this.timer = setTimeout(() => {
+        this.showMessage(false);
+      }, 500);
+    },
+
+    async dismiss() {
+      try {
+        await this.row.doAction('dismissInsufficientResourceQuota');
+      } catch (err) {
+        if (err?._status === 400 || err?._status === 503) {
+          this.$store.dispatch(
+            'growl/error',
+            {
+              title: this.t('harvester.notification.title.error'),
+              message: err?.errors[0],
+            },
+            { root: true }
+          );
+        }
+      }
+    },
+
+    canMiss(row, message) {
+      return row.warningMessage?.message === message && row.warningMessage?.canDismiss;
+    },
   },
 };
 </script>
@@ -101,17 +141,23 @@ export default {
     <!-- <HarvesterMigrationState v-show="isMigrating" :vm-resource="row" @state-changed="migrationStateChanged" /> -->
     <div v-show="!isMigrating" class="state">
       <BadgeStateFormatter :row="row" />
-      <VDropdown v-if="warningMessage.length" trigger="hover" offset="16">
-        <span class="tooltip-target">
+      <v-dropdown v-if="warningMessage.length" ref="popover" trigger="manual" offset="16">
+        <span class="tooltip-target" @mouseenter="showMessage(true)" @mouseleave="delayClose()">
           <i class="icon icon-warning icon-lg text-warning" />
         </span>
 
-        <template #popover>
-          <p v-for="(message, index) in warningMessage" :key="message">
-            {{ index + 1 }}. {{ message }}
-          </p>
+        <template #popper>
+          <div @mouseenter="showMessage(true)" @mouseleave="showMessage(false)">
+            <p v-for="(message, index) in warningMessage" :key="index">
+              {{ index + 1 }}.
+              <a v-if="canMiss(row, message)" class="text-link" role="button" @click="dismiss">
+                {{ t('harvester.upgradePage.dismissMessage') }}
+              </a>
+              {{ message }}
+            </p>
+          </div>
         </template>
-      </VDropdown>
+      </v-dropdown>
     </div>
   </span>
 </template>
